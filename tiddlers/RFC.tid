@@ -1,0 +1,9 @@
+created: 20181013100727013
+modified: 20181015112559355
+tags: 
+title: RFC
+type: text/vnd.tiddlywiki
+
+These Requests For Comments documents attempt to capture define certain isolated aspects of core and supplementary functionality. In the early stages they are used for discovery and discussions, as they mature, they can be used for reference.
+
+<<tabs "Raw Draft Stable Deprecated Retired Deleted" "Raw" "$:/state/rfc-status" "" "RFC/TabContent" "RFC/Tab">>

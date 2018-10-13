@@ -1,0 +1,7 @@
+created: 20181014035024020
+modified: 20181015101746923
+tags: [[RFC Status]]
+title: Deprecated
+type: text/vnd.tiddlywiki
+
+When stable specifications are replaced by newer draft specifications, they become deprecated specifications. Deprecated specifications should not be changed except to indicate their replacements, if any. Deprecated specifications are contracts between editors, implementers and end-users.

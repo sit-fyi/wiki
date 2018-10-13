@@ -1,0 +1,15 @@
+created: 20181013084005838
+modified: 20181013103556156
+tags: Concept
+title: Direct Acyclic Graph
+tmap.id: 53d41db0-1fe8-42d5-be94-166a4e6e6a40
+type: text/vnd.tiddlywiki
+
+<<<
+In mathematics and computer science, a directed acyclic graph (DAG /ˈdæɡ/), is a finite directed graph with no directed cycles. That is, it consists of finitely many vertices and edges, with each edge directed from one vertex to another, such that there is no way to start at any vertex v and follow a consistently-directed sequence of edges that eventually loops back to v again
+<<<
+([[Wikipedia|https://en.wikipedia.org/wiki/Directed_acyclic_graph]])
+
+An important addition / observation that is important in our context is that there's no requirement of connectivity. In other words, a DAG can consist of multiple DAGs, or an edge E,,n,, doesn't have to be reachable from E,,m,,.
+
+DAGs are very important in SIT. In fact, the entire space defined by SIT [[records|Record]] is one big (partially connected) DAG.

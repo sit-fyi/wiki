@@ -1,0 +1,19 @@
+created: 20181013094512433
+modified: 20181015105515261
+tags: Concept
+title: Record
+type: text/vnd.tiddlywiki
+
+A record is an abstract object that in itself is a recording of an observation.
+
+Any set of records MUST be completely ordered, meaning that for every pair of records $$R_n$$ and $$R_m$$ there is an established order $$O$$:
+
+$$ 
+O(R_n, R_m)  \in \{<,=, >\}
+$$
+
+Ordering $$O(R_n, R_m)$$ equal to $$<$$ (Less) implies that $$R_n$$ strictly precedes $$R_m$$.
+
+Ordering $$O(R_n, R_m)$$ equal to $$=$$ (Equal) implies that $$R_n$$ neither strictly precedes nor strictly follows $$R_m$$.
+
+Ordering $$O(R_n, R_m)$$ equal to $$>$$ (Greater) implies that $$R_n$$ strictly follows $$R_m$$.

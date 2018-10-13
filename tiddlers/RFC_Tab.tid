@@ -1,0 +1,7 @@
+created: 20181014035430294
+modified: 20181015101701508
+tags: 
+title: RFC/Tab
+type: text/vnd.tiddlywiki
+
+<$view tiddler=<<currentTab>> field="title"/> (<$count filter="[tag[RFC]status<currentTab>]"/>)

@@ -1,0 +1,86 @@
+created: 20181013100609684
+description: Pathname Octet String Tuple Encoding for Records
+modified: 20181015120749217
+status: Raw
+tags: RFC
+title: POSTER/1
+type: text/vnd.tiddlywiki
+
+! {{!!description}} [{{!!title}}] ({{!!status}})
+
+License: [[CC BY-SA 4.0]]
+
+!! Language
+
+{{RFC 2119: Language}}
+
+!! Introduction
+
+{{!!title}} defines an encoding of a record as a tuple of named files for the purpose of enabling collection of the information and subsequent access to it without any special tools.
+
+!! 1. Definitions
+!!! 1.1. Record
+
+{{Record}}
+
+!! 2. Constructs
+
+!! 2.1. Pathname
+
+Pathname $$\mu$$ is a slash<<ref "1">>-delimited string where allowed characters are limited to the a practical common denominator set that would be a legal component of a filename on mainstream operating systems, which is defined as any 8-bit characters with the exception of 0x00-0x1F 0x7F " * / : < > ? \ |
+
+It MUST NOT exceed 255 characters total.
+
+On operating systems or in environments that have more restrictions placed on filenames or pathnames, the implementation SHOULD use other means of storing records of this type (a database, for example).
+
+!! 2.2. Octet String
+
+An octet string $$\widetilde{OS}$$ is a sequence of octets (8-bit units of information, commonly referred to as "bytes")
+
+!! 2.3. Pairing
+
+A pairing is a morphism of pathname and an octet string:
+
+$$
+P:  \mu \rightarrow  \widetilde{OS}
+$$
+
+Simply put, it's a mapping of a pathname to an octet string.
+
+Example:
+
+$$
+\texttt{path/to/file} \rightarrow \mathtt{xff0001..}
+$$
+
+In this specification, a notation of $$P^\mu$$ or $$P^{\widetilde{OS}}$$ will be used to indicate a pathname or an octet string of a pairing, respectively.
+
+!! 2.4. Tuple
+
+A tuple is a set of pairings. A valid tuple MUST NOT have pairings with duplicate pathnames.
+
+In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the tuple.
+
+!! 3. Reference
+
+Reference $$R(r)$$ is a function that can uniquely identify record $$r$$. $$R_E(r)$$ is an encoding of $$R(r)$$ that is a valid pathname as per definition in 2.1.
+
+An implementation MAY choose its own reference and encoding functions at its discretion. However, future revisions of this specification MAY contain provisions that provide further instructions on this subject.
+
+At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s tuple and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
+
+!! 4. Ordering
+
+Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the tuple of the record $$\beta$$ where $$O(\alpha,\beta) = <$$
+
+In practical terms this means a presence of a an empty file.
+
+Example:
+
+$$
+\texttt{.prev/T2IRSS6S2KKSYAYXMWVJSB5LVJQ3TCQ7}
+$$
+
+---
+
+<<footnotes "1" "ASCII code 47: /">>

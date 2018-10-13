@@ -1,0 +1,7 @@
+created: 20181014035009927
+modified: 20181015103004540
+tags: [[RFC Status]]
+title: Stable
+type: text/vnd.tiddlywiki
+
+When draft specifications are used by third parties, they become stable specifications. Changes to stable specifications should be restricted to cosmetic ones, errata and clarifications. Stable specifications are contracts between editors, implementers, and end-users.

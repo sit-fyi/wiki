@@ -1,0 +1,9 @@
+created: 20181013113100360
+modified: 20181013113107548
+tags: 
+title: What is it?
+type: text/vnd.tiddlywiki
+
+SIT is a compact tool that helps tracking and sharing information between people and systems in a decentralized, sporadically-online environment (aka "the real world").
+
+Its goal is to lower the barrier for recording, querying and sharing information independently. Instead of having to setup and maintain a server and a database, or having to rely on services of an external third party, SIT is a self-contained binary for Linux, OS X and Windows that typically works on the end-user's computer. SIT's medium of record is files. No external database is required.
