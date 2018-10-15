@@ -1,0 +1,77 @@
+From 30fc8eee5f7b3490a6d98392dd913979866be308 Mon Sep 17 00:00:00 2001
+From: Yurii Rashkovskii <me@yrashk.com>
+Date: Mon, 15 Oct 2018 13:04:46 -0700
+Subject: [PATCH] Problem: superfluous articles in some sentences in SPORE/1
+
+"a the", "a an"
+
+Solution: pick the correct articles
+---
+ docs/index.html      | 6 +++---
+ tiddlers/SPORE_1.tid | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/docs/index.html b/docs/index.html
+index 1023878..e696d1c 100644
+--- a/docs/index.html
++++ b/docs/index.html
+@@ -9259,7 +9259,7 @@ Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strict
+ 
+ &lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
+ </div>
+-<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015195817713" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
++<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015200418758" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
+ <pre>! {{!!description}} [{{!!title}}] ({{!!status}})
+ 
+ License: [[CC BY-SA 4.0]]
+@@ -9281,7 +9281,7 @@ License: [[CC BY-SA 4.0]]
+ 
+ !! 2.1. Pathname
+ 
+-Pathname $$\mu$$ is a slash&lt;&lt;ref &quot;1&quot;&gt;&gt;-delimited string where allowed characters are limited to the a practical common denominator set that would be a legal component of a filename on mainstream operating systems, which is defined as any 8-bit characters with the exception of 0x00-0x1F 0x7F &quot; * / : &lt; &gt; ? \ |
++Pathname $$\mu$$ is a slash&lt;&lt;ref &quot;1&quot;&gt;&gt;-delimited string where allowed characters are limited to a practical common denominator set that would be a legal component of a filename on mainstream operating systems. It is defined as any 8-bit characters with the exception of 0x00-0x1F 0x7F &quot; * / : &lt; &gt; ? \ |
+ 
+ It MUST NOT exceed 255 characters total.
+ 
+@@ -9343,7 +9343,7 @@ These recommendations are made because these are the current defaults implemente
+ 
+ Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the ensemble of the record $$\beta$$ where $$O(\alpha,\beta) = &lt;$$
+ 
+-In practical terms this means a presence of a an empty file.
++In practical terms this means a presence of an empty file.
+ 
+ Example:
+ 
+diff --git a/tiddlers/SPORE_1.tid b/tiddlers/SPORE_1.tid
+index 39ed80a..1867329 100644
+--- a/tiddlers/SPORE_1.tid
++++ b/tiddlers/SPORE_1.tid
+@@ -1,6 +1,6 @@
+ created: 20181013100609684
+ description: Sparse Pathname Octet-string Record Ensemble
+-modified: 20181015195817713
++modified: 20181015200418758
+ status: Raw
+ tags: RFC
+ title: SPORE/1
+@@ -27,7 +27,7 @@ License: [[CC BY-SA 4.0]]
+ 
+ !! 2.1. Pathname
+ 
+-Pathname $$\mu$$ is a slash<<ref "1">>-delimited string where allowed characters are limited to the a practical common denominator set that would be a legal component of a filename on mainstream operating systems, which is defined as any 8-bit characters with the exception of 0x00-0x1F 0x7F " * / : < > ? \ |
++Pathname $$\mu$$ is a slash<<ref "1">>-delimited string where allowed characters are limited to a practical common denominator set that would be a legal component of a filename on mainstream operating systems. It is defined as any 8-bit characters with the exception of 0x00-0x1F 0x7F " * / : < > ? \ |
+ 
+ It MUST NOT exceed 255 characters total.
+ 
+@@ -89,7 +89,7 @@ These recommendations are made because these are the current defaults implemente
+ 
+ Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the ensemble of the record $$\beta$$ where $$O(\alpha,\beta) = <$$
+ 
+-In practical terms this means a presence of a an empty file.
++In practical terms this means a presence of an empty file.
+ 
+ Example:
+ 
+-- 
+2.16.5
+
