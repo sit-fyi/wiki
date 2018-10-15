@@ -1,0 +1,7 @@
+The guidelines imply that there's an inherent order to pairings in an
+ensemble. However, there isn't one.
+
+Solution: specify lexicographic ordering recommendation
+as a part of hashing recommendation in currently recommended reference
+implementation guidelines.
+

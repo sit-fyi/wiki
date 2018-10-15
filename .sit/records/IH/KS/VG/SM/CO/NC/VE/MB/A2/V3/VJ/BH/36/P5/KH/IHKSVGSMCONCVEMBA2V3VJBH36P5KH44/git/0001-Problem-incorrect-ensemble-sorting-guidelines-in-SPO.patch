@@ -1,0 +1,129 @@
+From 59d69409f83d83092b22cc11c2c85215252573a9 Mon Sep 17 00:00:00 2001
+From: Yurii Rashkovskii <me@yrashk.com>
+Date: Mon, 15 Oct 2018 12:58:59 -0700
+Subject: [PATCH] Problem: incorrect ensemble sorting guidelines in SPORE/1
+
+The guidelines imply that there's an inherent order to pairings in an
+ensemble. However, there isn't one.
+
+Solution: specify lexicographic ordering recommendation
+as a part of hashing recommendation in currently recommended reference
+implementation guidelines.
+---
+ docs/index.html           | 24 ++++++++++++++++++++----
+ tiddlers/$__StoryList.tid |  6 +++---
+ tiddlers/SPORE_1.tid      | 24 ++++++++++++++++++++----
+ 3 files changed, 43 insertions(+), 11 deletions(-)
+
+diff --git a/docs/index.html b/docs/index.html
+index b274414..1023878 100644
+--- a/docs/index.html
++++ b/docs/index.html
+@@ -9259,7 +9259,7 @@ Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strict
+ 
+ &lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
+ </div>
+-<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015191849017" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
++<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015195817713" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
+ <pre>! {{!!description}} [{{!!title}}] ({{!!status}})
+ 
+ License: [[CC BY-SA 4.0]]
+@@ -9313,15 +9313,31 @@ In this specification, a notation of $$P^\mu$$ or $$P^{\widetilde{OS}}$$ will be
+ 
+ An ensemble is a fixed set of pairings. A valid ensemble MUST NOT have pairings with duplicate pathnames.
+ 
+-In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the ensemble.
+-
+ !! 3. Reference
+ 
+ Reference $$R(r)$$ is a function that can uniquely identify record $$r$$. $$R_E(r)$$ is an encoding of $$R(r)$$ that is a valid pathname as per definition in 2.1.
+ 
+ An implementation MAY choose its own reference and encoding functions at its discretion. However, future revisions of this specification MAY contain provisions that provide further instructions on this subject.
+ 
+-At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s ensemble and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
++!! 3.1. Current Recommendation
++
++At the time of writing, it is RECOMMENDED to define $$R(r)$$ as 
++
++$$
++H(\xrightarrow[S]{P_1^\mu}, \xrightarrow[S]{P_1^{\widetilde{OS}}}, \mathellipsis, \xrightarrow[S]{P_n^\mu}, \xrightarrow[S]{P_n^{\widetilde{OS}}})
++$$ where 
++
++$$n$$ is the number of pairings in $$r$$'s ensemble, 
++
++$$\xrightarrow[S]{P_k}$$ (where $$k \in \{1..n\}$$) is $$k$$-th pairing according to a sorting function $$S$$ and
++
++$$H(x, \mathellipsis)$$ is a hash function. 
++
++It is RECOMMENDED that the sorting function $$S$$ is a lexicographical sorting function.
++
++It is RECOMMENDED that the hash function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. 
++
++These recommendations are made because these are the current defaults implemented in SIT.
+ 
+ !! 4. Ordering
+ 
+diff --git a/tiddlers/$__StoryList.tid b/tiddlers/$__StoryList.tid
+index f01d2b6..a75a10c 100644
+--- a/tiddlers/$__StoryList.tid
++++ b/tiddlers/$__StoryList.tid
+@@ -1,6 +1,6 @@
+-created: 20181015191849020
+-list: [[Welcome to SIT]] Concepts RFC SPORE/1
+-modified: 20181015191849020
++created: 20181015195817703
++list: SPORE/1
++modified: 20181015195817703
+ title: $:/StoryList
+ type: text/vnd.tiddlywiki
+ 
+diff --git a/tiddlers/SPORE_1.tid b/tiddlers/SPORE_1.tid
+index 155b2ba..39ed80a 100644
+--- a/tiddlers/SPORE_1.tid
++++ b/tiddlers/SPORE_1.tid
+@@ -1,6 +1,6 @@
+ created: 20181013100609684
+ description: Sparse Pathname Octet-string Record Ensemble
+-modified: 20181015191849017
++modified: 20181015195817713
+ status: Raw
+ tags: RFC
+ title: SPORE/1
+@@ -59,15 +59,31 @@ In this specification, a notation of $$P^\mu$$ or $$P^{\widetilde{OS}}$$ will be
+ 
+ An ensemble is a fixed set of pairings. A valid ensemble MUST NOT have pairings with duplicate pathnames.
+ 
+-In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the ensemble.
+-
+ !! 3. Reference
+ 
+ Reference $$R(r)$$ is a function that can uniquely identify record $$r$$. $$R_E(r)$$ is an encoding of $$R(r)$$ that is a valid pathname as per definition in 2.1.
+ 
+ An implementation MAY choose its own reference and encoding functions at its discretion. However, future revisions of this specification MAY contain provisions that provide further instructions on this subject.
+ 
+-At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s ensemble and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
++!! 3.1. Current Recommendation
++
++At the time of writing, it is RECOMMENDED to define $$R(r)$$ as 
++
++$$
++H(\xrightarrow[S]{P_1^\mu}, \xrightarrow[S]{P_1^{\widetilde{OS}}}, \mathellipsis, \xrightarrow[S]{P_n^\mu}, \xrightarrow[S]{P_n^{\widetilde{OS}}})
++$$ where 
++
++$$n$$ is the number of pairings in $$r$$'s ensemble, 
++
++$$\xrightarrow[S]{P_k}$$ (where $$k \in \{1..n\}$$) is $$k$$-th pairing according to a sorting function $$S$$ and
++
++$$H(x, \mathellipsis)$$ is a hash function. 
++
++It is RECOMMENDED that the sorting function $$S$$ is a lexicographical sorting function.
++
++It is RECOMMENDED that the hash function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. 
++
++These recommendations are made because these are the current defaults implemented in SIT.
+ 
+ !! 4. Ordering
+ 
+-- 
+2.16.5
+
