@@ -1,0 +1,248 @@
+From 83a0afb26f3a63829f53333ffc2da38c55d6acc8 Mon Sep 17 00:00:00 2001
+From: Yurii Rashkovskii <me@yrashk.com>
+Date: Mon, 15 Oct 2018 12:19:02 -0700
+Subject: [PATCH] Problem: "tuple" term in POSTER/1
+
+Tuple implies ordering of its elements, while in SIT there is no
+particular ordering of elements in records (other than for
+identification purposes -- and this is something that can and will
+become more flexible in the future)
+
+Solution: rename "tuple" to "ensemble"
+
+Also, this renames POSTER/1 to SPORE/1, which (I think) is a much better
+name because of its reference to desert computing as in "A
+dormant nonreproductive body formed by certain bacteria in response to
+adverse environmental conditions."
+---
+ docs/index.html                        | 94 +++++++++++++++++-----------------
+ tiddlers/$__StoryList.tid              |  5 +-
+ tiddlers/{POSTER_1.tid => SPORE_1.tid} | 18 +++----
+ 3 files changed, 60 insertions(+), 57 deletions(-)
+ rename tiddlers/{POSTER_1.tid => SPORE_1.tid} (71%)
+
+diff --git a/docs/index.html b/docs/index.html
+index ffec67e..b274414 100644
+--- a/docs/index.html
++++ b/docs/index.html
+@@ -179,8 +179,6 @@ Error message and password prompt
+ 
+ <li>Draft</li>
+ 
+-<li>POSTER/1</li>
+-
+ <li>Raw</li>
+ 
+ <li>Record</li>
+@@ -195,6 +193,8 @@ Error message and password prompt
+ 
+ <li>RFC/TabContent</li>
+ 
++<li>SPORE/1</li>
++
+ <li>Stable</li>
+ 
+ <li>Welcome to SIT</li>
+@@ -9221,7 +9221,45 @@ DAGs are very important in SIT. In fact, the entire space defined by SIT [[recor
+ <div created="20181014034853170" modified="20181015101756970" tags="[[RFC Status]]" title="Draft" type="text/vnd.tiddlywiki">
+ <pre>When raw specifications can be demonstrated, they become draft specifications. Changes to draft specifications should be done in consultation with users. Draft specifications are contracts between the editors and implementers.</pre>
+ </div>
+-<div created="20181013100609684" description="Pathname Octet String Tuple Encoding for Records" modified="20181015120749217" status="Raw" tags="RFC" title="POSTER/1" type="text/vnd.tiddlywiki">
++<div created="20181014034823141" modified="20181015101735681" tags="[[RFC Status]]" title="Raw" type="text/vnd.tiddlywiki">
++<pre>All new specifications are raw specifications. Changes to raw specifications can be unilateral and arbitrary. Those seeking to implement a raw specification should ask for it to be made a draft specification. Raw specifications have no contractual weight.</pre>
++</div>
++<div created="20181013094512433" modified="20181015105515261" tags="Concept" title="Record" type="text/vnd.tiddlywiki">
++<pre>A record is an abstract object that in itself is a recording of an observation.
++
++Any set of records MUST be completely ordered, meaning that for every pair of records $$R_n$$ and $$R_m$$ there is an established order $$O$$:
++
++$$ 
++O(R_n, R_m)  \in \{&lt;,=, &gt;\}
++$$
++
++Ordering $$O(R_n, R_m)$$ equal to $$&lt;$$ (Less) implies that $$R_n$$ strictly precedes $$R_m$$.
++
++Ordering $$O(R_n, R_m)$$ equal to $$=$$ (Equal) implies that $$R_n$$ neither strictly precedes nor strictly follows $$R_m$$.
++
++Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strictly follows $$R_m$$.
++</pre>
++</div>
++<div created="20181014035035367" modified="20181015101806812" tags="[[RFC Status]]" title="Retired" type="text/vnd.tiddlywiki">
++<pre>When deprecated specifications are no longer used in products, they become retired specifications. Retired specifications are part of the historical record. They should not be changed except to indicate their replacements, if any. Retired specifications have no contractual weight.</pre>
++</div>
++<div created="20181013100727013" modified="20181015112559355" tags="" title="RFC" type="text/vnd.tiddlywiki">
++<pre>These Requests For Comments documents attempt to capture define certain isolated aspects of core and supplementary functionality. In the early stages they are used for discovery and discussions, as they mature, they can be used for reference.
++
++&lt;&lt;tabs &quot;Raw Draft Stable Deprecated Retired Deleted&quot; &quot;Raw&quot; &quot;$:/state/rfc-status&quot; &quot;&quot; &quot;RFC/TabContent&quot; &quot;RFC/Tab&quot;&gt;&gt;</pre>
++</div>
++<div created="20181013105718135" modified="20181013105743305" tags="" title="RFC 2119: Language" type="text/vnd.tiddlywiki">
++<pre>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in RFC 2119.</pre>
++</div>
++<div created="20181014035430294" modified="20181015101701508" tags="" title="RFC/Tab" type="text/vnd.tiddlywiki">
++<pre>&lt;$view tiddler=&lt;&lt;currentTab&gt;&gt; field=&quot;title&quot;/&gt; (&lt;$count filter=&quot;[tag[RFC]status&lt;currentTab&gt;]&quot;/&gt;)</pre>
++</div>
++<div created="20181015100921596" modified="20181015101708802" tags="" title="RFC/TabContent" type="text/vnd.tiddlywiki">
++<pre>&lt;$transclude tiddler=&lt;&lt;currentTab&gt;&gt; /&gt;
++
++&lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
++</div>
++<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015191849017" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
+ <pre>! {{!!description}} [{{!!title}}] ({{!!status}})
+ 
+ License: [[CC BY-SA 4.0]]
+@@ -9232,7 +9270,7 @@ License: [[CC BY-SA 4.0]]
+ 
+ !! Introduction
+ 
+-{{!!title}} defines an encoding of a record as a tuple of named files for the purpose of enabling collection of the information and subsequent access to it without any special tools.
++{{!!title}} defines an records as a ensembles of named files for the purpose of enabling collection of the information and subsequent access to it without any special tools.
+ 
+ !! 1. Definitions
+ !!! 1.1. Record
+@@ -9271,11 +9309,11 @@ $$
+ 
+ In this specification, a notation of $$P^\mu$$ or $$P^{\widetilde{OS}}$$ will be used to indicate a pathname or an octet string of a pairing, respectively.
+ 
+-!! 2.4. Tuple
++!! 2.4. Ensemble
+ 
+-A tuple is a set of pairings. A valid tuple MUST NOT have pairings with duplicate pathnames.
++An ensemble is a fixed set of pairings. A valid ensemble MUST NOT have pairings with duplicate pathnames.
+ 
+-In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the tuple.
++In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the ensemble.
+ 
+ !! 3. Reference
+ 
+@@ -9283,11 +9321,11 @@ Reference $$R(r)$$ is a function that can uniquely identify record $$r$$. $$R_E(
+ 
+ An implementation MAY choose its own reference and encoding functions at its discretion. However, future revisions of this specification MAY contain provisions that provide further instructions on this subject.
+ 
+-At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s tuple and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
++At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s ensemble and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
+ 
+ !! 4. Ordering
+ 
+-Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the tuple of the record $$\beta$$ where $$O(\alpha,\beta) = &lt;$$
++Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the ensemble of the record $$\beta$$ where $$O(\alpha,\beta) = &lt;$$
+ 
+ In practical terms this means a presence of a an empty file.
+ 
+@@ -9301,44 +9339,6 @@ $$
+ 
+ &lt;&lt;footnotes &quot;1&quot; &quot;ASCII code 47: /&quot;&gt;&gt;</pre>
+ </div>
+-<div created="20181014034823141" modified="20181015101735681" tags="[[RFC Status]]" title="Raw" type="text/vnd.tiddlywiki">
+-<pre>All new specifications are raw specifications. Changes to raw specifications can be unilateral and arbitrary. Those seeking to implement a raw specification should ask for it to be made a draft specification. Raw specifications have no contractual weight.</pre>
+-</div>
+-<div created="20181013094512433" modified="20181015105515261" tags="Concept" title="Record" type="text/vnd.tiddlywiki">
+-<pre>A record is an abstract object that in itself is a recording of an observation.
+-
+-Any set of records MUST be completely ordered, meaning that for every pair of records $$R_n$$ and $$R_m$$ there is an established order $$O$$:
+-
+-$$ 
+-O(R_n, R_m)  \in \{&lt;,=, &gt;\}
+-$$
+-
+-Ordering $$O(R_n, R_m)$$ equal to $$&lt;$$ (Less) implies that $$R_n$$ strictly precedes $$R_m$$.
+-
+-Ordering $$O(R_n, R_m)$$ equal to $$=$$ (Equal) implies that $$R_n$$ neither strictly precedes nor strictly follows $$R_m$$.
+-
+-Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strictly follows $$R_m$$.
+-</pre>
+-</div>
+-<div created="20181014035035367" modified="20181015101806812" tags="[[RFC Status]]" title="Retired" type="text/vnd.tiddlywiki">
+-<pre>When deprecated specifications are no longer used in products, they become retired specifications. Retired specifications are part of the historical record. They should not be changed except to indicate their replacements, if any. Retired specifications have no contractual weight.</pre>
+-</div>
+-<div created="20181013100727013" modified="20181015112559355" tags="" title="RFC" type="text/vnd.tiddlywiki">
+-<pre>These Requests For Comments documents attempt to capture define certain isolated aspects of core and supplementary functionality. In the early stages they are used for discovery and discussions, as they mature, they can be used for reference.
+-
+-&lt;&lt;tabs &quot;Raw Draft Stable Deprecated Retired Deleted&quot; &quot;Raw&quot; &quot;$:/state/rfc-status&quot; &quot;&quot; &quot;RFC/TabContent&quot; &quot;RFC/Tab&quot;&gt;&gt;</pre>
+-</div>
+-<div created="20181013105718135" modified="20181013105743305" tags="" title="RFC 2119: Language" type="text/vnd.tiddlywiki">
+-<pre>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in RFC 2119.</pre>
+-</div>
+-<div created="20181014035430294" modified="20181015101701508" tags="" title="RFC/Tab" type="text/vnd.tiddlywiki">
+-<pre>&lt;$view tiddler=&lt;&lt;currentTab&gt;&gt; field=&quot;title&quot;/&gt; (&lt;$count filter=&quot;[tag[RFC]status&lt;currentTab&gt;]&quot;/&gt;)</pre>
+-</div>
+-<div created="20181015100921596" modified="20181015101708802" tags="" title="RFC/TabContent" type="text/vnd.tiddlywiki">
+-<pre>&lt;$transclude tiddler=&lt;&lt;currentTab&gt;&gt; /&gt;
+-
+-&lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
+-</div>
+ <div created="20181014035009927" modified="20181015103004540" tags="[[RFC Status]]" title="Stable" type="text/vnd.tiddlywiki">
+ <pre>When draft specifications are used by third parties, they become stable specifications. Changes to stable specifications should be restricted to cosmetic ones, errata and clarifications. Stable specifications are contracts between editors, implementers, and end-users.</pre>
+ </div>
+diff --git a/tiddlers/$__StoryList.tid b/tiddlers/$__StoryList.tid
+index 57d90d2..f01d2b6 100644
+--- a/tiddlers/$__StoryList.tid
++++ b/tiddlers/$__StoryList.tid
+@@ -1,3 +1,6 @@
+-list: [[Welcome to SIT]] Concepts RFC
++created: 20181015191849020
++list: [[Welcome to SIT]] Concepts RFC SPORE/1
++modified: 20181015191849020
+ title: $:/StoryList
++type: text/vnd.tiddlywiki
+ 
+diff --git a/tiddlers/POSTER_1.tid b/tiddlers/SPORE_1.tid
+similarity index 71%
+rename from tiddlers/POSTER_1.tid
+rename to tiddlers/SPORE_1.tid
+index b08b676..155b2ba 100644
+--- a/tiddlers/POSTER_1.tid
++++ b/tiddlers/SPORE_1.tid
+@@ -1,9 +1,9 @@
+ created: 20181013100609684
+-description: Pathname Octet String Tuple Encoding for Records
+-modified: 20181015120749217
++description: Sparse Pathname Octet-string Record Ensemble
++modified: 20181015191849017
+ status: Raw
+ tags: RFC
+-title: POSTER/1
++title: SPORE/1
+ type: text/vnd.tiddlywiki
+ 
+ ! {{!!description}} [{{!!title}}] ({{!!status}})
+@@ -16,7 +16,7 @@ License: [[CC BY-SA 4.0]]
+ 
+ !! Introduction
+ 
+-{{!!title}} defines an encoding of a record as a tuple of named files for the purpose of enabling collection of the information and subsequent access to it without any special tools.
++{{!!title}} defines an records as a ensembles of named files for the purpose of enabling collection of the information and subsequent access to it without any special tools.
+ 
+ !! 1. Definitions
+ !!! 1.1. Record
+@@ -55,11 +55,11 @@ $$
+ 
+ In this specification, a notation of $$P^\mu$$ or $$P^{\widetilde{OS}}$$ will be used to indicate a pathname or an octet string of a pairing, respectively.
+ 
+-!! 2.4. Tuple
++!! 2.4. Ensemble
+ 
+-A tuple is a set of pairings. A valid tuple MUST NOT have pairings with duplicate pathnames.
++An ensemble is a fixed set of pairings. A valid ensemble MUST NOT have pairings with duplicate pathnames.
+ 
+-In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the tuple.
++In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the ensemble.
+ 
+ !! 3. Reference
+ 
+@@ -67,11 +67,11 @@ Reference $$R(r)$$ is a function that can uniquely identify record $$r$$. $$R_E(
+ 
+ An implementation MAY choose its own reference and encoding functions at its discretion. However, future revisions of this specification MAY contain provisions that provide further instructions on this subject.
+ 
+-At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s tuple and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
++At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s ensemble and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
+ 
+ !! 4. Ordering
+ 
+-Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the tuple of the record $$\beta$$ where $$O(\alpha,\beta) = <$$
++Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the ensemble of the record $$\beta$$ where $$O(\alpha,\beta) = <$$
+ 
+ In practical terms this means a presence of a an empty file.
+ 
+-- 
+2.16.5
+

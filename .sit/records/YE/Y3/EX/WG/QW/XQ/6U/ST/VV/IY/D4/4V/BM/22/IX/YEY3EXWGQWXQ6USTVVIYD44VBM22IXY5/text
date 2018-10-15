@@ -1,0 +1,12 @@
+Tuple implies ordering of its elements, while in SIT there is no
+particular ordering of elements in records (other than for
+identification purposes -- and this is something that can and will
+become more flexible in the future)
+
+Solution: rename "tuple" to "ensemble"
+
+Also, this renames POSTER/1 to SPORE/1, which (I think) is a much better
+name because of its reference to desert computing as in "A
+dormant nonreproductive body formed by certain bacteria in response to
+adverse environmental conditions."
+
