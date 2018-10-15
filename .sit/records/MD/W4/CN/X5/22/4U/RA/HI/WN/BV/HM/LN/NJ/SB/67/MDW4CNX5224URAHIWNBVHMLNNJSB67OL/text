@@ -1,0 +1,5 @@
+It is unclear what the lexicographic function $$S$$ in 3.1. is applied
+over.
+
+Solution: specify that it applies over pathname $$\mu$$
+

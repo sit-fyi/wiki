@@ -1,0 +1,82 @@
+From e45a4e3aa69b5e90253290b6e35e1c7a7ef92a16 Mon Sep 17 00:00:00 2001
+From: Yurii Rashkovskii <me@yrashk.com>
+Date: Mon, 15 Oct 2018 13:35:47 -0700
+Subject: [PATCH] Problem: clarity of lexicographic function's scope in SPORE/1
+
+It is unclear what the lexicographic function $$S$$ in 3.1. is applied
+over.
+
+Solution: specify that it applies over pathname $$\mu$$
+---
+ docs/index.html      | 8 ++++----
+ tiddlers/SPORE_1.tid | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/docs/index.html b/docs/index.html
+index e696d1c..53c1497 100644
+--- a/docs/index.html
++++ b/docs/index.html
+@@ -9259,7 +9259,7 @@ Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strict
+ 
+ &lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
+ </div>
+-<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015200418758" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
++<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015204402540" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
+ <pre>! {{!!description}} [{{!!title}}] ({{!!status}})
+ 
+ License: [[CC BY-SA 4.0]]
+@@ -9324,16 +9324,16 @@ An implementation MAY choose its own reference and encoding functions at its dis
+ At the time of writing, it is RECOMMENDED to define $$R(r)$$ as 
+ 
+ $$
+-H(\xrightarrow[S]{P_1^\mu}, \xrightarrow[S]{P_1^{\widetilde{OS}}}, \mathellipsis, \xrightarrow[S]{P_n^\mu}, \xrightarrow[S]{P_n^{\widetilde{OS}}})
++H(\xrightarrow[S(P)]{P_1^\mu}, \xrightarrow[S(P)]{P_1^{\widetilde{OS}}}, \mathellipsis, \xrightarrow[S(P)]{P_n^\mu}, \xrightarrow[S(P)]{P_n^{\widetilde{OS}}})
+ $$ where 
+ 
+ $$n$$ is the number of pairings in $$r$$'s ensemble, 
+ 
+-$$\xrightarrow[S]{P_k}$$ (where $$k \in \{1..n\}$$) is $$k$$-th pairing according to a sorting function $$S$$ and
++$$\xrightarrow[S(P)]{P_k}$$ (where $$k \in \{1..n\}$$) is $$k$$-th pairing according to a sorting function $$S$$ over pairings and
+ 
+ $$H(x, \mathellipsis)$$ is a hash function. 
+ 
+-It is RECOMMENDED that the sorting function $$S$$ is a lexicographical sorting function.
++It is RECOMMENDED that $$S$$ is a lexicographical sorting function over pathnames $$\mu$$
+ 
+ It is RECOMMENDED that the hash function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. 
+ 
+diff --git a/tiddlers/SPORE_1.tid b/tiddlers/SPORE_1.tid
+index 1867329..9b29556 100644
+--- a/tiddlers/SPORE_1.tid
++++ b/tiddlers/SPORE_1.tid
+@@ -1,6 +1,6 @@
+ created: 20181013100609684
+ description: Sparse Pathname Octet-string Record Ensemble
+-modified: 20181015200418758
++modified: 20181015204402540
+ status: Raw
+ tags: RFC
+ title: SPORE/1
+@@ -70,16 +70,16 @@ An implementation MAY choose its own reference and encoding functions at its dis
+ At the time of writing, it is RECOMMENDED to define $$R(r)$$ as 
+ 
+ $$
+-H(\xrightarrow[S]{P_1^\mu}, \xrightarrow[S]{P_1^{\widetilde{OS}}}, \mathellipsis, \xrightarrow[S]{P_n^\mu}, \xrightarrow[S]{P_n^{\widetilde{OS}}})
++H(\xrightarrow[S(P)]{P_1^\mu}, \xrightarrow[S(P)]{P_1^{\widetilde{OS}}}, \mathellipsis, \xrightarrow[S(P)]{P_n^\mu}, \xrightarrow[S(P)]{P_n^{\widetilde{OS}}})
+ $$ where 
+ 
+ $$n$$ is the number of pairings in $$r$$'s ensemble, 
+ 
+-$$\xrightarrow[S]{P_k}$$ (where $$k \in \{1..n\}$$) is $$k$$-th pairing according to a sorting function $$S$$ and
++$$\xrightarrow[S(P)]{P_k}$$ (where $$k \in \{1..n\}$$) is $$k$$-th pairing according to a sorting function $$S$$ over pairings and
+ 
+ $$H(x, \mathellipsis)$$ is a hash function. 
+ 
+-It is RECOMMENDED that the sorting function $$S$$ is a lexicographical sorting function.
++It is RECOMMENDED that $$S$$ is a lexicographical sorting function over pathnames $$\mu$$
+ 
+ It is RECOMMENDED that the hash function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. 
+ 
+-- 
+2.16.5
+
