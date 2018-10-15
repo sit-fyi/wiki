@@ -147,13 +147,9 @@ Error message and password prompt
 
 <li>$:/palette</li>
 
-<li>$:/plugins/tiddlywiki/filesystem</li>
-
 <li>$:/plugins/tiddlywiki/katex</li>
 
 <li>$:/plugins/tiddlywiki/railroad</li>
-
-<li>$:/plugins/tiddlywiki/tiddlyweb</li>
 
 <li>$:/SiteSubtitle</li>
 
@@ -215,10 +211,10 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
-<div created="20181014150520530" modified="20181014150521594" title="$:/config/RelinkOnRename" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014150520530" modified="20181014150521594" title="$:/config/RelinkOnRename" type="text/vnd.tiddlywiki">
 <pre>yes</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.17" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.17">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/Acknowledgements&quot;: {
@@ -8752,18 +8748,18 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div caption="{{$:/language/Buttons/Excise/Caption}}" condition="[&lt;targetTiddler&gt;type[]] [&lt;targetTiddler&gt;type[text/vnd.tiddlywiki]] +[first[]]" description="{{$:/language/Buttons/Excise/Hint}}" dropdown="$:/core/ui/EditorToolbar/excise-dropdown" icon="$:/core/images/excise" shortcuts="((excise))" tags="$:/tags/EditorToolbar" title="$:/core/ui/EditorToolbar/excise" revision="0" bag="default">
+<div caption="{{$:/language/Buttons/Excise/Caption}}" condition="[&lt;targetTiddler&gt;type[]] [&lt;targetTiddler&gt;type[text/vnd.tiddlywiki]] +[first[]]" description="{{$:/language/Buttons/Excise/Hint}}" dropdown="$:/core/ui/EditorToolbar/excise-dropdown" icon="$:/core/images/excise" shortcuts="((excise))" tags="$:/tags/EditorToolbar" title="$:/core/ui/EditorToolbar/excise">
 <pre></pre>
 </div>
-<div created="20181013085119853" modified="20181014035158473" title="$:/DefaultTiddlers" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013085119853" modified="20181014035158473" title="$:/DefaultTiddlers" type="text/vnd.tiddlywiki">
 <pre>[[Welcome to SIT]]
 [[Concepts]]
 [[RFC]]</pre>
 </div>
-<div title="$:/isEncrypted" revision="0" bag="default">
+<div title="$:/isEncrypted">
 <pre>no</pre>
 </div>
-<div created="20140217160644604" creator="Danielo Rodriguez" modified="20181015110423383" modifier="Danielo Rodriguez" tags="macros $:/tags/Macro" title="$:/macros/danielo/footNote" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20140217160644604" creator="Danielo Rodriguez" modified="20181015110423383" modifier="Danielo Rodriguez" tags="macros $:/tags/Macro" title="$:/macros/danielo/footNote" type="text/vnd.tiddlywiki">
 <pre>\define ref(label)
 &lt;$button popup=&quot;$:/state/$label$&quot; class=&quot;tc-btn-invisible tc-slider&quot;&gt;&lt;sup style=&quot;color:green&quot;&gt;$label$&lt;/sup&gt;&lt;/$button&gt;
 \end
@@ -8790,26 +8786,10 @@ Error message and password prompt
 \end
 </pre>
 </div>
-<div created="20181013112902187" modified="20181013113137826" title="$:/palette" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013112902187" modified="20181013113137826" title="$:/palette" type="text/vnd.tiddlywiki">
 <pre>$:/palettes/Vanilla</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="Local filesystem syncadaptor" list="readme" plugin-type="plugin" title="$:/plugins/tiddlywiki/filesystem" type="application/json" version="5.1.17" revision="0" bag="default">
-<pre>{
-    &quot;tiddlers&quot;: {
-        &quot;$:/plugins/tiddlywiki/filesystem/filesystemadaptor.js&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/filesystem/filesystemadaptor.js&quot;,
-            &quot;text&quot;: &quot;/*\\\ntitle: $:/plugins/tiddlywiki/filesystem/filesystemadaptor.js\ntype: application/javascript\nmodule-type: syncadaptor\n\nA sync adaptor module for synchronising with the local filesystem via node.js APIs\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\&quot;use strict\&quot;;\n\n// Get a reference to the file system\nvar fs = $tw.node ? require(\&quot;fs\&quot;) : null,\n\tpath = $tw.node ? require(\&quot;path\&quot;) : null;\n\nfunction FileSystemAdaptor(options) {\n\tvar self = this;\n\tthis.wiki = options.wiki;\n\tthis.logger = new $tw.utils.Logger(\&quot;filesystem\&quot;,{colour: \&quot;blue\&quot;});\n\t// Create the &lt;wiki&gt;/tiddlers folder if it doesn't exist\n\t$tw.utils.createDirectory($tw.boot.wikiTiddlersPath);\n}\n\nFileSystemAdaptor.prototype.name = \&quot;filesystem\&quot;;\n\nFileSystemAdaptor.prototype.isReady = function() {\n\t// The file system adaptor is always ready\n\treturn true;\n};\n\nFileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {\n\treturn {};\n};\n\n/*\nReturn a fileInfo object for a tiddler, creating it if necessary:\n  filepath: the absolute path to the file containing the tiddler\n  type: the type of the tiddler file (NOT the type of the tiddler -- see below)\n  hasMetaFile: true if the file also has a companion .meta file\n\nThe boot process populates $tw.boot.files for each of the tiddler files that it loads. The type is found by looking up the extension in $tw.config.fileExtensionInfo (eg \&quot;application/x-tiddler\&quot; for \&quot;.tid\&quot; files).\n\nIt is the responsibility of the filesystem adaptor to update $tw.boot.files for new files that are created.\n*/\nFileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {\n\t// See if we've already got information about this file\n\tvar self = this,\n\t\ttitle = tiddler.fields.title,\n\t\tfileInfo = $tw.boot.files[title];\n\tif(fileInfo) {\n\t\t// If so, just invoke the callback\n\t\tcallback(null,fileInfo);\n\t} else {\n\t\t// Otherwise, we'll need to generate it\n\t\tfileInfo = {};\n\t\tvar tiddlerType = tiddler.fields.type || \&quot;text/vnd.tiddlywiki\&quot;;\n\t\t// Get the content type info\n\t\tvar contentTypeInfo = $tw.config.contentTypeInfo[tiddlerType] || {};\n\t\t// Get the file type by looking up the extension\n\t\tvar extension = contentTypeInfo.extension || \&quot;.tid\&quot;;\n\t\tfileInfo.type = ($tw.config.fileExtensionInfo[extension] || {type: \&quot;application/x-tiddler\&quot;}).type;\n\t\t// Use a .meta file unless we're saving a .tid file.\n\t\t// (We would need more complex logic if we supported other template rendered tiddlers besides .tid)\n\t\tfileInfo.hasMetaFile = (fileInfo.type !== \&quot;application/x-tiddler\&quot;) &amp;&amp; (fileInfo.type !== \&quot;application/json\&quot;);\n\t\tif(!fileInfo.hasMetaFile) {\n\t\t\textension = \&quot;.tid\&quot;;\n\t\t}\n\t\t// Generate the base filepath and ensure the directories exist\n\t\tvar baseFilepath = path.resolve($tw.boot.wikiTiddlersPath,this.generateTiddlerBaseFilepath(title));\n\t\t$tw.utils.createFileDirectories(baseFilepath);\n\t\t// Start by getting a list of the existing files in the directory\n\t\tfs.readdir(path.dirname(baseFilepath),function(err,files) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Start with the base filename plus the extension\n\t\t\tvar filepath = baseFilepath;\n\t\t\tif(filepath.substr(-extension.length).toLocaleLowerCase() !== extension.toLocaleLowerCase()) {\n\t\t\t\tfilepath = filepath + extension;\n\t\t\t}\n\t\t\tvar filename = path.basename(filepath),\n\t\t\t\tcount = 1;\n\t\t\t// Add a discriminator if we're clashing with an existing filename while\n\t\t\t// handling case-insensitive filesystems (NTFS, FAT/FAT32, etc.)\n\t\t\twhile(files.some(function(value) {return value.toLocaleLowerCase() === filename.toLocaleLowerCase();})) {\n\t\t\t\tfilepath = baseFilepath + \&quot; \&quot; + (count++) + extension;\n\t\t\t\tfilename = path.basename(filepath);\n\t\t\t}\n\t\t\t// Set the final fileInfo\n\t\t\tfileInfo.filepath = filepath;\nconsole.log(\&quot;\\x1b[1;35m\&quot; + \&quot;For \&quot; + title + \&quot;, type is \&quot; + fileInfo.type + \&quot; hasMetaFile is \&quot; + fileInfo.hasMetaFile + \&quot; filepath is \&quot; + fileInfo.filepath + \&quot;\\x1b[0m\&quot;);\n\t\t\t$tw.boot.files[title] = fileInfo;\n\t\t\t// Pass it to the callback\n\t\t\tcallback(null,fileInfo);\n\t\t});\n\t}\n};\n\n/*\nGiven a list of filters, apply every one in turn to source, and return the first result of the first filter with non-empty result.\n*/\nFileSystemAdaptor.prototype.findFirstFilter = function(filters,source) {\n\tfor(var i=0; i&lt;filters.length; i++) {\n\t\tvar result = this.wiki.filterTiddlers(filters[i],null,source);\n\t\tif(result.length &gt; 0) {\n\t\t\treturn result[0];\n\t\t}\n\t}\n\treturn null;\n};\n\n/*\nGiven a tiddler title and an array of existing filenames, generate a new legal filename for the title, case insensitively avoiding the array of existing filenames\n*/\nFileSystemAdaptor.prototype.generateTiddlerBaseFilepath = function(title) {\n\tvar baseFilename;\n\t// Check whether the user has configured a tiddler -&gt; pathname mapping\n\tvar pathNameFilters = this.wiki.getTiddlerText(\&quot;$:/config/FileSystemPaths\&quot;);\n\tif(pathNameFilters) {\n\t\tvar source = this.wiki.makeTiddlerIterator([title]);\n\t\tbaseFilename = this.findFirstFilter(pathNameFilters.split(\&quot;\\n\&quot;),source);\n\t\tif(baseFilename) {\n\t\t\t// Interpret \&quot;/\&quot; and \&quot;\\\&quot; as path separator\n\t\t\tbaseFilename = baseFilename.replace(/\\/|\\\\/g,path.sep);\n\t\t}\n\t}\n\tif(!baseFilename) {\n\t\t// No mappings provided, or failed to match this tiddler so we use title as filename\n\t\tbaseFilename = title.replace(/\\/|\\\\/g,\&quot;_\&quot;);\n\t}\n\t// Remove any of the characters that are illegal in Windows filenames\n\tvar baseFilename = $tw.utils.transliterate(baseFilename.replace(/&lt;|&gt;|\\:|\\\&quot;|\\||\\?|\\*|\\^/g,\&quot;_\&quot;));\n\t// Truncate the filename if it is too long\n\tif(baseFilename.length &gt; 200) {\n\t\tbaseFilename = baseFilename.substr(0,200);\n\t}\n\treturn baseFilename;\n};\n\n/*\nSave a tiddler and invoke the callback with (err,adaptorInfo,revision)\n*/\nFileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {\n\tvar self = this;\n\tthis.getTiddlerFileInfo(tiddler,function(err,fileInfo) {\n\t\tif(err) {\n\t\t\treturn callback(err);\n\t\t}\n\t\tvar filepath = fileInfo.filepath,\n\t\t\terror = $tw.utils.createDirectory(path.dirname(filepath));\n\t\tif(error) {\n\t\t\treturn callback(error);\n\t\t}\n\t\tif(fileInfo.hasMetaFile) {\n\t\t\t// Save the tiddler as a separate body and meta file\n\t\t\tvar typeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || \&quot;text/plain\&quot;] || {encoding: \&quot;utf8\&quot;};\n\t\t\tfs.writeFile(filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {\n\t\t\t\tif(err) {\n\t\t\t\t\treturn callback(err);\n\t\t\t\t}\n\t\t\t\tcontent = self.wiki.renderTiddler(\&quot;text/plain\&quot;,\&quot;$:/core/templates/tiddler-metadata\&quot;,{variables: {currentTiddler: tiddler.fields.title}});\n\t\t\t\tfs.writeFile(fileInfo.filepath + \&quot;.meta\&quot;,content,{encoding: \&quot;utf8\&quot;},function (err) {\n\t\t\t\t\tif(err) {\n\t\t\t\t\t\treturn callback(err);\n\t\t\t\t\t}\n\t\t\t\t\tself.logger.log(\&quot;Saved file\&quot;,filepath);\n\t\t\t\t\treturn callback(null);\n\t\t\t\t});\n\t\t\t});\n\t\t} else {\n\t\t\t// Save the tiddler as a self contained templated file\n\t\t\tvar content = self.wiki.renderTiddler(\&quot;text/plain\&quot;,\&quot;$:/core/templates/tid-tiddler\&quot;,{variables: {currentTiddler: tiddler.fields.title}});\n\t\t\tfs.writeFile(filepath,content,{encoding: \&quot;utf8\&quot;},function (err) {\n\t\t\t\tif(err) {\n\t\t\t\t\treturn callback(err);\n\t\t\t\t}\n\t\t\t\tself.logger.log(\&quot;Saved file\&quot;,filepath);\n\t\t\t\treturn callback(null);\n\t\t\t});\n\t\t}\n\t});\n};\n\n/*\nLoad a tiddler and invoke the callback with (err,tiddlerFields)\n\nWe don't need to implement loading for the file system adaptor, because all the tiddler files will have been loaded during the boot process.\n*/\nFileSystemAdaptor.prototype.loadTiddler = function(title,callback) {\n\tcallback(null,null);\n};\n\n/*\nDelete a tiddler and invoke the callback with (err)\n*/\nFileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {\n\tvar self = this,\n\t\tfileInfo = $tw.boot.files[title];\n\t// Only delete the tiddler if we have writable information for the file\n\tif(fileInfo) {\n\t\t// Delete the file\n\t\tfs.unlink(fileInfo.filepath,function(err) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\tself.logger.log(\&quot;Deleted file\&quot;,fileInfo.filepath);\n\t\t\t// Delete the metafile if present\n\t\t\tif(fileInfo.hasMetaFile) {\n\t\t\t\tfs.unlink(fileInfo.filepath + \&quot;.meta\&quot;,function(err) {\n\t\t\t\t\tif(err) {\n\t\t\t\t\t\treturn callback(err);\n\t\t\t\t\t}\n\t\t\t\t\treturn $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);\n\t\t\t\t});\n\t\t\t} else {\n\t\t\t\treturn $tw.utils.deleteEmptyDirs(path.dirname(fileInfo.filepath),callback);\n\t\t\t}\n\t\t});\n\t} else {\n\t\tcallback(null);\n\t}\n};\n\nif(fs) {\n\texports.adaptorClass = FileSystemAdaptor;\n}\n\n})();\n&quot;,
-            &quot;type&quot;: &quot;application/javascript&quot;,
-            &quot;module-type&quot;: &quot;syncadaptor&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/filesystem/readme&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/filesystem/readme&quot;,
-            &quot;text&quot;: &quot;The filesystem plugin is used under Node.js to synchronise tiddler changes back to the file system. It is inert when used in the browser.\n\n[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/filesystem]]\n&quot;
-        }
-    }
-}</pre>
-</div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" created="20181013090054658" dependents="" description="KaTeX: mathematical typography" list="readme usage" modified="20181013090054658" plugin-type="plugin" title="$:/plugins/tiddlywiki/katex" type="application/json" version="5.1.17" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" created="20181013090054658" dependents="" description="KaTeX: mathematical typography" list="readme usage" modified="20181013090054658" plugin-type="plugin" title="$:/plugins/tiddlywiki/katex" type="application/json" version="5.1.17">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/plugins/tiddlywiki/katex/katex.min.css&quot;: {
@@ -8969,7 +8949,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="AstridElocson" created="20181015105626369" dependents="" description="Railroad diagram generator" list="readme usage syntax example" modified="20181015105626369" plugin-type="plugin" title="$:/plugins/tiddlywiki/railroad" type="application/json" version="5.1.17" revision="0" bag="default">
+<div author="AstridElocson" created="20181015105626369" dependents="" description="Railroad diagram generator" list="readme usage syntax example" modified="20181015105626369" plugin-type="plugin" title="$:/plugins/tiddlywiki/railroad" type="application/json" version="5.1.17">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/plugins/tiddlywiki/railroad/components.js&quot;: {
@@ -9050,56 +9030,16 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWeb and TiddlySpace components" list="readme" plugin-type="plugin" title="$:/plugins/tiddlywiki/tiddlyweb" type="application/json" version="5.1.17" revision="0" bag="default">
-<pre>{
-    &quot;tiddlers&quot;: {
-        &quot;GettingStarted&quot;: {
-            &quot;title&quot;: &quot;GettingStarted&quot;,
-            &quot;tags&quot;: &quot;$:/tags/GettingStarted&quot;,
-            &quot;caption&quot;: &quot;Step 1&lt;br&gt;Syncing&quot;,
-            &quot;text&quot;: &quot;Welcome to ~TiddlyWiki and the ~TiddlyWiki community\n\nVisit https://tiddlywiki.com/ to find out more about ~TiddlyWiki and what it can do.\n\n! Syncing Changes to the Server\n\nBefore you can start storing important information in ~TiddlyWiki it is important to make sure that your changes are being reliably saved by the server.\n\n# Create a new tiddler using the {{$:/core/images/new-button}} button in the sidebar on the right\n# Click the {{$:/core/images/done-button}} button at the top right of the new tiddler\n# Check the ~TiddlyWiki command line for a message confirming the tiddler has been saved\n# Refresh the page in the browser to and verify that the new tiddler has been correctly saved\n&quot;
-        },
-        &quot;$:/config/SaveWikiButton/Template&quot;: {
-            &quot;title&quot;: &quot;$:/config/SaveWikiButton/Template&quot;,
-            &quot;text&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/save/offline&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/ServerControlPanel&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/ServerControlPanel&quot;,
-            &quot;caption&quot;: &quot;Server&quot;,
-            &quot;tags&quot;: &quot;$:/tags/ControlPanel&quot;,
-            &quot;text&quot;: &quot;&lt;$reveal state=\&quot;$:/status/IsLoggedIn\&quot; type=\&quot;nomatch\&quot; text=\&quot;yes\&quot;&gt;\nLog in to ~TiddlyWeb: &lt;$button message=\&quot;tm-login\&quot;&gt;Login&lt;/$button&gt;\n&lt;/$reveal&gt;\n&lt;$reveal state=\&quot;$:/status/IsLoggedIn\&quot; type=\&quot;match\&quot; text=\&quot;yes\&quot;&gt;\nLogged in as {{$:/status/UserName}} &lt;$button message=\&quot;tm-logout\&quot;&gt;Logout&lt;/$button&gt;\n&lt;/$reveal&gt;\n\n----\n\nHost configuration: &lt;$edit-text tiddler=\&quot;$:/config/tiddlyweb/host\&quot; tag=\&quot;input\&quot; default=\&quot;\&quot;/&gt;\n\n&lt;blockquote&gt;//for example, `$protocol$//$host$/folder`, where `$protocol$` is replaced by the protocol (typically `http` or `https`), and `$host$` by the host name//&lt;/blockquote&gt;\n\n----\n\n&lt;$button message=\&quot;tm-server-refresh\&quot;&gt;Refresh&lt;/$button&gt; to fetch changes from the server immediately\n&quot;
-        },
-        &quot;$:/core/templates/html-div-tiddler&quot;: {
-            &quot;title&quot;: &quot;$:/core/templates/html-div-tiddler&quot;,
-            &quot;text&quot;: &quot;&lt;!--\n\nThis template is used for saving tiddlers as an HTML DIV tag with attributes representing the tiddler fields. This version includes the tiddler changecount as the field `revision`.\n\n--&gt;`&lt;div`&lt;$fields exclude='text revision bag' template=' $name$=\&quot;$encoded_value$\&quot;'&gt;&lt;/$fields&gt;` revision=\&quot;`&lt;&lt;changecount&gt;&gt;`\&quot; bag=\&quot;default\&quot;&gt;\n&lt;pre&gt;`&lt;$view field=\&quot;text\&quot; format=\&quot;htmlencoded\&quot; /&gt;`&lt;/pre&gt;\n&lt;/div&gt;`\n&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/readme&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/readme&quot;,
-            &quot;text&quot;: &quot;This plugin runs in the browser to synchronise tiddler changes to and from a TiddlyWeb-compatible server (including TiddlyWiki 5 itself, running on Node.js). It is inert when run under Node.js. Disabling this plugin via the browser can not be undone via the browser since this plugin provides the mechanism to synchronize settings with the server.\n\n[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/tiddlyweb]]\n&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/save/offline&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/save/offline&quot;,
-            &quot;text&quot;: &quot;\\define saveTiddlerFilter()\n[is[tiddler]] -[[$:/boot/boot.css]] -[[$:/HistoryList]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]] +[sort[title]] $(publishFilter)$\n\\end\n{{$:/core/templates/tiddlywiki5.html}}\n&quot;
-        },
-        &quot;$:/plugins/tiddlywiki/tiddlyweb/tiddlywebadaptor.js&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/tiddlyweb/tiddlywebadaptor.js&quot;,
-            &quot;text&quot;: &quot;/*\\\ntitle: $:/plugins/tiddlywiki/tiddlyweb/tiddlywebadaptor.js\ntype: application/javascript\nmodule-type: syncadaptor\n\nA sync adaptor module for synchronising with TiddlyWeb compatible servers\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\&quot;use strict\&quot;;\n\nvar CONFIG_HOST_TIDDLER = \&quot;$:/config/tiddlyweb/host\&quot;,\n\tDEFAULT_HOST_TIDDLER = \&quot;$protocol$//$host$/\&quot;;\n\nfunction TiddlyWebAdaptor(options) {\n\tthis.wiki = options.wiki;\n\tthis.host = this.getHost();\n\tthis.recipe = undefined;\n\tthis.hasStatus = false;\n\tthis.logger = new $tw.utils.Logger(\&quot;TiddlyWebAdaptor\&quot;);\n}\n\nTiddlyWebAdaptor.prototype.name = \&quot;tiddlyweb\&quot;;\n\nTiddlyWebAdaptor.prototype.isReady = function() {\n\treturn this.hasStatus;\n};\n\nTiddlyWebAdaptor.prototype.getHost = function() {\n\tvar text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),\n\t\tsubstitutions = [\n\t\t\t{name: \&quot;protocol\&quot;, value: document.location.protocol},\n\t\t\t{name: \&quot;host\&quot;, value: document.location.host}\n\t\t];\n\tfor(var t=0; t&lt;substitutions.length; t++) {\n\t\tvar s = substitutions[t];\n\t\ttext = $tw.utils.replaceString(text,new RegExp(\&quot;\\\\$\&quot; + s.name + \&quot;\\\\$\&quot;,\&quot;mg\&quot;),s.value);\n\t}\n\treturn text;\n};\n\nTiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {\n\treturn {\n\t\tbag: tiddler.fields.bag\n\t};\n};\n\n/*\nGet the current status of the TiddlyWeb connection\n*/\nTiddlyWebAdaptor.prototype.getStatus = function(callback) {\n\t// Get status\n\tvar self = this;\n\tthis.logger.log(\&quot;Getting status\&quot;);\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;status\&quot;,\n\t\tcallback: function(err,data) {\n\t\t\tself.hasStatus = true;\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Decode the status JSON\n\t\t\tvar json = null,\n\t\t\t\tisLoggedIn = false;\n\t\t\ttry {\n\t\t\t\tjson = JSON.parse(data);\n\t\t\t} catch (e) {\n\t\t\t}\n\t\t\tif(json) {\n\t\t\t\tself.logger.log(\&quot;Status:\&quot;,data);\n\t\t\t\t// Record the recipe\n\t\t\t\tif(json.space) {\n\t\t\t\t\tself.recipe = json.space.recipe;\n\t\t\t\t}\n\t\t\t\t// Check if we're logged in\n\t\t\t\tisLoggedIn = json.username !== \&quot;GUEST\&quot;;\n\t\t\t}\n\t\t\t// Invoke the callback if present\n\t\t\tif(callback) {\n\t\t\t\tcallback(null,isLoggedIn,json.username);\n\t\t\t}\n\t\t}\n\t});\n};\n\n/*\nAttempt to login and invoke the callback(err)\n*/\nTiddlyWebAdaptor.prototype.login = function(username,password,callback) {\n\tvar options = {\n\t\turl: this.host + \&quot;challenge/tiddlywebplugins.tiddlyspace.cookie_form\&quot;,\n\t\ttype: \&quot;POST\&quot;,\n\t\tdata: {\n\t\t\tuser: username,\n\t\t\tpassword: password,\n\t\t\ttiddlyweb_redirect: \&quot;/status\&quot; // workaround to marginalize automatic subsequent GET\n\t\t},\n\t\tcallback: function(err) {\n\t\t\tcallback(err);\n\t\t}\n\t};\n\tthis.logger.log(\&quot;Logging in:\&quot;,options);\n\t$tw.utils.httpRequest(options);\n};\n\n/*\n*/\nTiddlyWebAdaptor.prototype.logout = function(callback) {\n\tvar options = {\n\t\turl: this.host + \&quot;logout\&quot;,\n\t\ttype: \&quot;POST\&quot;,\n\t\tdata: {\n\t\t\tcsrf_token: this.getCsrfToken(),\n\t\t\ttiddlyweb_redirect: \&quot;/status\&quot; // workaround to marginalize automatic subsequent GET\n\t\t},\n\t\tcallback: function(err,data) {\n\t\t\tcallback(err);\n\t\t}\n\t};\n\tthis.logger.log(\&quot;Logging out:\&quot;,options);\n\t$tw.utils.httpRequest(options);\n};\n\n/*\nRetrieve the CSRF token from its cookie\n*/\nTiddlyWebAdaptor.prototype.getCsrfToken = function() {\n\tvar regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,\n\t\tmatch = regex.exec(document.cookie),\n\t\tcsrf = null;\n\tif (match &amp;&amp; (match.length === 2)) {\n\t\tcsrf = match[1];\n\t}\n\treturn csrf;\n};\n\n/*\nGet an array of skinny tiddler fields from the server\n*/\nTiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {\n\tvar self = this;\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;recipes/\&quot; + this.recipe + \&quot;/tiddlers.json\&quot;,\n\t\tcallback: function(err,data) {\n\t\t\t// Check for errors\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Process the tiddlers to make sure the revision is a string\n\t\t\tvar tiddlers = JSON.parse(data);\n\t\t\tfor(var t=0; t&lt;tiddlers.length; t++) {\n\t\t\t\ttiddlers[t] = self.convertTiddlerFromTiddlyWebFormat(tiddlers[t]);\n\t\t\t}\n\t\t\t// Invoke the callback with the skinny tiddlers\n\t\t\tcallback(null,tiddlers);\n\t\t}\n\t});\n};\n\n/*\nSave a tiddler and invoke the callback with (err,adaptorInfo,revision)\n*/\nTiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {\n\tvar self = this;\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;recipes/\&quot; + encodeURIComponent(this.recipe) + \&quot;/tiddlers/\&quot; + encodeURIComponent(tiddler.fields.title),\n\t\ttype: \&quot;PUT\&quot;,\n\t\theaders: {\n\t\t\t\&quot;Content-type\&quot;: \&quot;application/json\&quot;\n\t\t},\n\t\tdata: this.convertTiddlerToTiddlyWebFormat(tiddler),\n\t\tcallback: function(err,data,request) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Save the details of the new revision of the tiddler\n\t\t\tvar etagInfo = self.parseEtag(request.getResponseHeader(\&quot;Etag\&quot;));\n\t\t\t// Invoke the callback\n\t\t\tcallback(null,{\n\t\t\t\tbag: etagInfo.bag\n\t\t\t}, etagInfo.revision);\n\t\t}\n\t});\n};\n\n/*\nLoad a tiddler and invoke the callback with (err,tiddlerFields)\n*/\nTiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {\n\tvar self = this;\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;recipes/\&quot; + encodeURIComponent(this.recipe) + \&quot;/tiddlers/\&quot; + encodeURIComponent(title),\n\t\tcallback: function(err,data,request) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Invoke the callback\n\t\t\tcallback(null,self.convertTiddlerFromTiddlyWebFormat(JSON.parse(data)));\n\t\t}\n\t});\n};\n\n/*\nDelete a tiddler and invoke the callback with (err)\noptions include:\ntiddlerInfo: the syncer's tiddlerInfo for this tiddler\n*/\nTiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {\n\tvar self = this,\n\t\tbag = options.tiddlerInfo.adaptorInfo.bag;\n\t// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it\n\tif(!bag) {\n\t\treturn callback(null);\n\t}\n\t// Issue HTTP request to delete the tiddler\n\t$tw.utils.httpRequest({\n\t\turl: this.host + \&quot;bags/\&quot; + encodeURIComponent(bag) + \&quot;/tiddlers/\&quot; + encodeURIComponent(title),\n\t\ttype: \&quot;DELETE\&quot;,\n\t\tcallback: function(err,data,request) {\n\t\t\tif(err) {\n\t\t\t\treturn callback(err);\n\t\t\t}\n\t\t\t// Invoke the callback\n\t\t\tcallback(null);\n\t\t}\n\t});\n};\n\n/*\nConvert a tiddler to a field set suitable for PUTting to TiddlyWeb\n*/\nTiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {\n\tvar result = {},\n\t\tknownFields = [\n\t\t\t\&quot;bag\&quot;, \&quot;created\&quot;, \&quot;creator\&quot;, \&quot;modified\&quot;, \&quot;modifier\&quot;, \&quot;permissions\&quot;, \&quot;recipe\&quot;, \&quot;revision\&quot;, \&quot;tags\&quot;, \&quot;text\&quot;, \&quot;title\&quot;, \&quot;type\&quot;, \&quot;uri\&quot;\n\t\t];\n\tif(tiddler) {\n\t\t$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {\n\t\t\tvar fieldString = fieldName === \&quot;tags\&quot; ?\n\t\t\t\t\t\t\t\ttiddler.fields.tags :\n\t\t\t\t\t\t\t\ttiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string\n\n\t\t\tif(knownFields.indexOf(fieldName) !== -1) {\n\t\t\t\t// If it's a known field, just copy it across\n\t\t\t\tresult[fieldName] = fieldString;\n\t\t\t} else {\n\t\t\t\t// If it's unknown, put it in the \&quot;fields\&quot; field\n\t\t\t\tresult.fields = result.fields || {};\n\t\t\t\tresult.fields[fieldName] = fieldString;\n\t\t\t}\n\t\t});\n\t}\n\t// Default the content type\n\tresult.type = result.type || \&quot;text/vnd.tiddlywiki\&quot;;\n\treturn JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);\n};\n\n/*\nConvert a field set in TiddlyWeb format into ordinary TiddlyWiki5 format\n*/\nTiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerFields) {\n\tvar self = this,\n\t\tresult = {};\n\t// Transfer the fields, pulling down the `fields` hashmap\n\t$tw.utils.each(tiddlerFields,function(element,title,object) {\n\t\tif(title === \&quot;fields\&quot;) {\n\t\t\t$tw.utils.each(element,function(element,subTitle,object) {\n\t\t\t\tresult[subTitle] = element;\n\t\t\t});\n\t\t} else {\n\t\t\tresult[title] = tiddlerFields[title];\n\t\t}\n\t});\n\t// Make sure the revision is expressed as a string\n\tif(typeof result.revision === \&quot;number\&quot;) {\n\t\tresult.revision = result.revision.toString();\n\t}\n\t// Some unholy freaking of content types\n\tif(result.type === \&quot;text/javascript\&quot;) {\n\t\tresult.type = \&quot;application/javascript\&quot;;\n\t} else if(!result.type || result.type === \&quot;None\&quot;) {\n\t\tresult.type = \&quot;text/x-tiddlywiki\&quot;;\n\t}\n\treturn result;\n};\n\n/*\nSplit a TiddlyWeb Etag into its constituent parts. For example:\n\n```\n\&quot;system-images_public/unsyncedIcon/946151:9f11c278ccde3a3149f339f4a1db80dd4369fc04\&quot;\n```\n\nNote that the value includes the opening and closing double quotes.\n\nThe parts are:\n\n```\n&lt;bag&gt;/&lt;title&gt;/&lt;revision&gt;:&lt;hash&gt;\n```\n*/\nTiddlyWebAdaptor.prototype.parseEtag = function(etag) {\n\tvar firstSlash = etag.indexOf(\&quot;/\&quot;),\n\t\tlastSlash = etag.lastIndexOf(\&quot;/\&quot;),\n\t\tcolon = etag.lastIndexOf(\&quot;:\&quot;);\n\tif(firstSlash === -1 || lastSlash === -1 || colon === -1) {\n\t\treturn null;\n\t} else {\n\t\treturn {\n\t\t\tbag: decodeURIComponent(etag.substring(1,firstSlash)),\n\t\t\ttitle: decodeURIComponent(etag.substring(firstSlash + 1,lastSlash)),\n\t\t\trevision: etag.substring(lastSlash + 1,colon)\n\t\t};\n\t}\n};\n\nif($tw.browser &amp;&amp; document.location.protocol.substr(0,4) === \&quot;http\&quot; ) {\n\texports.adaptorClass = TiddlyWebAdaptor;\n}\n\n})();\n&quot;,
-            &quot;type&quot;: &quot;application/javascript&quot;,
-            &quot;module-type&quot;: &quot;syncadaptor&quot;
-        }
-    }
-}</pre>
-</div>
-<div created="20181013091058210" modified="20181013102941218" title="$:/SiteSubtitle" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013091058210" modified="20181013102941218" title="$:/SiteSubtitle" type="text/vnd.tiddlywiki">
 <pre>Serverless Information Tracker</pre>
 </div>
-<div created="20181013083735807" modified="20181013103012798" title="$:/SiteTitle" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013083735807" modified="20181013103012798" title="$:/SiteTitle" type="text/vnd.tiddlywiki">
 <pre>SIT</pre>
 </div>
-<div list="[[Welcome to SIT]] Concepts RFC" title="$:/StoryList" revision="1" bag="default">
+<div list="[[Welcome to SIT]] Concepts RFC" title="$:/StoryList">
 <pre></pre>
 </div>
-<div plugin-type="info" title="$:/temp/info-plugin" type="application/json" revision="0" bag="default">
+<div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/info/browser&quot;: {
@@ -9113,10 +9053,10 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20181013190232124" modified="20181013190233205" title="$:/theme" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013190232124" modified="20181013190233205" title="$:/theme" type="text/vnd.tiddlywiki">
 <pre>$:/themes/tiddlywiki/centralised</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" created="20181013190227275" dependents="$:/themes/tiddlywiki/snowwhite" description="Centralises the story river" modified="20181013190227276" name="Centralised" plugin-type="theme" title="$:/themes/tiddlywiki/centralised" type="application/json" version="5.1.17" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" created="20181013190227275" dependents="$:/themes/tiddlywiki/snowwhite" description="Centralises the story river" modified="20181013190227276" name="Centralised" plugin-type="theme" title="$:/themes/tiddlywiki/centralised" type="application/json" version="5.1.17">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/themes/tiddlywiki/centralised/styles.tid&quot;: {
@@ -9127,7 +9067,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.17" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.17">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/themes/tiddlywiki/snowwhite/base&quot;: {
@@ -9138,7 +9078,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="Basic theme" name="Vanilla" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/vanilla" type="application/json" version="5.1.17" revision="0" bag="default">
+<div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="Basic theme" name="Vanilla" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/vanilla" type="application/json" version="5.1.17">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/themes/tiddlywiki/vanilla/themetweaks&quot;: {
@@ -9236,7 +9176,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20181013105308588" modified="20181013105615809" tags="License" title="CC BY-SA 4.0" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013105308588" modified="20181013105615809" tags="License" title="CC BY-SA 4.0" type="text/vnd.tiddlywiki">
 <pre>!! You are free to:
 
 * Share — copy and redistribute the material in any medium or format
@@ -9256,19 +9196,19 @@ No additional restrictions — You may not apply legal terms or technological me
 
 License: https://creativecommons.org/licenses/by-sa/4.0/</pre>
 </div>
-<div created="20181013091142889" modified="20181013091744025" tags="" title="Concepts" tmap.id="e518e826-3515-48dc-9ebb-b9805af3bde4" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013091142889" modified="20181013091744025" tags="" title="Concepts" tmap.id="e518e826-3515-48dc-9ebb-b9805af3bde4" type="text/vnd.tiddlywiki">
 <pre>These are the main concepts in SIT:
 
 &lt;&lt;list-links &quot;[tag[Concept]sort[title]]&quot;&gt;&gt;
 </pre>
 </div>
-<div created="20181014035045697" modified="20181015101730757" tags="[[RFC Status]]" title="Deleted" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014035045697" modified="20181015101730757" tags="[[RFC Status]]" title="Deleted" type="text/vnd.tiddlywiki">
 <pre>Deleted specifications are those that have not reached maturity (stable) and were discarded. They should not be used and are only kept for their historical value. Only Raw and Draft specifications can be deleted.</pre>
 </div>
-<div created="20181014035024020" modified="20181015101746923" tags="[[RFC Status]]" title="Deprecated" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014035024020" modified="20181015101746923" tags="[[RFC Status]]" title="Deprecated" type="text/vnd.tiddlywiki">
 <pre>When stable specifications are replaced by newer draft specifications, they become deprecated specifications. Deprecated specifications should not be changed except to indicate their replacements, if any. Deprecated specifications are contracts between editors, implementers and end-users.</pre>
 </div>
-<div created="20181013084005838" modified="20181013103556156" tags="Concept" title="Direct Acyclic Graph" tmap.id="53d41db0-1fe8-42d5-be94-166a4e6e6a40" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013084005838" modified="20181013103556156" tags="Concept" title="Direct Acyclic Graph" tmap.id="53d41db0-1fe8-42d5-be94-166a4e6e6a40" type="text/vnd.tiddlywiki">
 <pre>&lt;&lt;&lt;
 In mathematics and computer science, a directed acyclic graph (DAG /ˈdæɡ/), is a finite directed graph with no directed cycles. That is, it consists of finitely many vertices and edges, with each edge directed from one vertex to another, such that there is no way to start at any vertex v and follow a consistently-directed sequence of edges that eventually loops back to v again
 &lt;&lt;&lt;
@@ -9278,10 +9218,10 @@ An important addition / observation that is important in our context is that the
 
 DAGs are very important in SIT. In fact, the entire space defined by SIT [[records|Record]] is one big (partially connected) DAG.</pre>
 </div>
-<div created="20181014034853170" modified="20181015101756970" tags="[[RFC Status]]" title="Draft" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014034853170" modified="20181015101756970" tags="[[RFC Status]]" title="Draft" type="text/vnd.tiddlywiki">
 <pre>When raw specifications can be demonstrated, they become draft specifications. Changes to draft specifications should be done in consultation with users. Draft specifications are contracts between the editors and implementers.</pre>
 </div>
-<div created="20181013100609684" description="Pathname Octet String Tuple Encoding for Records" modified="20181015120749217" status="Raw" tags="RFC" title="POSTER/1" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013100609684" description="Pathname Octet String Tuple Encoding for Records" modified="20181015120749217" status="Raw" tags="RFC" title="POSTER/1" type="text/vnd.tiddlywiki">
 <pre>! {{!!description}} [{{!!title}}] ({{!!status}})
 
 License: [[CC BY-SA 4.0]]
@@ -9361,10 +9301,10 @@ $$
 
 &lt;&lt;footnotes &quot;1&quot; &quot;ASCII code 47: /&quot;&gt;&gt;</pre>
 </div>
-<div created="20181014034823141" modified="20181015101735681" tags="[[RFC Status]]" title="Raw" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014034823141" modified="20181015101735681" tags="[[RFC Status]]" title="Raw" type="text/vnd.tiddlywiki">
 <pre>All new specifications are raw specifications. Changes to raw specifications can be unilateral and arbitrary. Those seeking to implement a raw specification should ask for it to be made a draft specification. Raw specifications have no contractual weight.</pre>
 </div>
-<div created="20181013094512433" modified="20181015105515261" tags="Concept" title="Record" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013094512433" modified="20181015105515261" tags="Concept" title="Record" type="text/vnd.tiddlywiki">
 <pre>A record is an abstract object that in itself is a recording of an observation.
 
 Any set of records MUST be completely ordered, meaning that for every pair of records $$R_n$$ and $$R_m$$ there is an established order $$O$$:
@@ -9380,29 +9320,29 @@ Ordering $$O(R_n, R_m)$$ equal to $$=$$ (Equal) implies that $$R_n$$ neither str
 Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strictly follows $$R_m$$.
 </pre>
 </div>
-<div created="20181014035035367" modified="20181015101806812" tags="[[RFC Status]]" title="Retired" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014035035367" modified="20181015101806812" tags="[[RFC Status]]" title="Retired" type="text/vnd.tiddlywiki">
 <pre>When deprecated specifications are no longer used in products, they become retired specifications. Retired specifications are part of the historical record. They should not be changed except to indicate their replacements, if any. Retired specifications have no contractual weight.</pre>
 </div>
-<div created="20181013100727013" modified="20181015112559355" tags="" title="RFC" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013100727013" modified="20181015112559355" tags="" title="RFC" type="text/vnd.tiddlywiki">
 <pre>These Requests For Comments documents attempt to capture define certain isolated aspects of core and supplementary functionality. In the early stages they are used for discovery and discussions, as they mature, they can be used for reference.
 
 &lt;&lt;tabs &quot;Raw Draft Stable Deprecated Retired Deleted&quot; &quot;Raw&quot; &quot;$:/state/rfc-status&quot; &quot;&quot; &quot;RFC/TabContent&quot; &quot;RFC/Tab&quot;&gt;&gt;</pre>
 </div>
-<div created="20181013105718135" modified="20181013105743305" tags="" title="RFC 2119: Language" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013105718135" modified="20181013105743305" tags="" title="RFC 2119: Language" type="text/vnd.tiddlywiki">
 <pre>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in RFC 2119.</pre>
 </div>
-<div created="20181014035430294" modified="20181015101701508" tags="" title="RFC/Tab" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014035430294" modified="20181015101701508" tags="" title="RFC/Tab" type="text/vnd.tiddlywiki">
 <pre>&lt;$view tiddler=&lt;&lt;currentTab&gt;&gt; field=&quot;title&quot;/&gt; (&lt;$count filter=&quot;[tag[RFC]status&lt;currentTab&gt;]&quot;/&gt;)</pre>
 </div>
-<div created="20181015100921596" modified="20181015101708802" tags="" title="RFC/TabContent" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181015100921596" modified="20181015101708802" tags="" title="RFC/TabContent" type="text/vnd.tiddlywiki">
 <pre>&lt;$transclude tiddler=&lt;&lt;currentTab&gt;&gt; /&gt;
 
 &lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
 </div>
-<div created="20181014035009927" modified="20181015103004540" tags="[[RFC Status]]" title="Stable" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181014035009927" modified="20181015103004540" tags="[[RFC Status]]" title="Stable" type="text/vnd.tiddlywiki">
 <pre>When draft specifications are used by third parties, they become stable specifications. Changes to stable specifications should be restricted to cosmetic ones, errata and clarifications. Stable specifications are contracts between editors, implementers, and end-users.</pre>
 </div>
-<div created="20181013085033882" modified="20181015101647372" tags="" title="Welcome to SIT" tmap.id="ceedfedc-260f-4490-b99d-cb788b4ca860" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013085033882" modified="20181015101647372" tags="" title="Welcome to SIT" tmap.id="ceedfedc-260f-4490-b99d-cb788b4ca860" type="text/vnd.tiddlywiki">
 <pre>! Serverless Information Tracker
 
 &lt;&lt;&lt;
@@ -9415,7 +9355,7 @@ SIT enables decentralized, sporadically connected parties to contribute and proc
 
 </pre>
 </div>
-<div created="20181013113100360" modified="20181013113107548" tags="" title="What is it?" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20181013113100360" modified="20181013113107548" tags="" title="What is it?" type="text/vnd.tiddlywiki">
 <pre>SIT is a compact tool that helps tracking and sharing information between people and systems in a decentralized, sporadically-online environment (aka &quot;the real world&quot;).
 
 Its goal is to lower the barrier for recording, querying and sharing information independently. Instead of having to setup and maintain a server and a database, or having to rely on services of an external third party, SIT is a self-contained binary for Linux, OS X and Windows that typically works on the end-user's computer. SIT's medium of record is files. No external database is required.</pre>
