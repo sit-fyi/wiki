@@ -1,6 +1,6 @@
 created: 20181013100609684
 description: Sparse Pathname Octet-string Record Ensemble
-modified: 20181015191849017
+modified: 20181015195817713
 status: Raw
 tags: RFC
 title: SPORE/1
@@ -59,15 +59,31 @@ In this specification, a notation of $$P^\mu$$ or $$P^{\widetilde{OS}}$$ will be
 
 An ensemble is a fixed set of pairings. A valid ensemble MUST NOT have pairings with duplicate pathnames.
 
-In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the ensemble.
-
 !! 3. Reference
 
 Reference $$R(r)$$ is a function that can uniquely identify record $$r$$. $$R_E(r)$$ is an encoding of $$R(r)$$ that is a valid pathname as per definition in 2.1.
 
 An implementation MAY choose its own reference and encoding functions at its discretion. However, future revisions of this specification MAY contain provisions that provide further instructions on this subject.
 
-At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s ensemble and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
+!! 3.1. Current Recommendation
+
+At the time of writing, it is RECOMMENDED to define $$R(r)$$ as 
+
+$$
+H(\xrightarrow[S]{P_1^\mu}, \xrightarrow[S]{P_1^{\widetilde{OS}}}, \mathellipsis, \xrightarrow[S]{P_n^\mu}, \xrightarrow[S]{P_n^{\widetilde{OS}}})
+$$ where 
+
+$$n$$ is the number of pairings in $$r$$'s ensemble, 
+
+$$\xrightarrow[S]{P_k}$$ (where $$k \in \{1..n\}$$) is $$k$$-th pairing according to a sorting function $$S$$ and
+
+$$H(x, \mathellipsis)$$ is a hash function. 
+
+It is RECOMMENDED that the sorting function $$S$$ is a lexicographical sorting function.
+
+It is RECOMMENDED that the hash function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. 
+
+These recommendations are made because these are the current defaults implemented in SIT.
 
 !! 4. Ordering
 
