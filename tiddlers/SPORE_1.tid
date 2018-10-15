@@ -1,9 +1,9 @@
 created: 20181013100609684
-description: Pathname Octet String Tuple Encoding for Records
-modified: 20181015120749217
+description: Sparse Pathname Octet-string Record Ensemble
+modified: 20181015191849017
 status: Raw
 tags: RFC
-title: POSTER/1
+title: SPORE/1
 type: text/vnd.tiddlywiki
 
 ! {{!!description}} [{{!!title}}] ({{!!status}})
@@ -16,7 +16,7 @@ License: [[CC BY-SA 4.0]]
 
 !! Introduction
 
-{{!!title}} defines an encoding of a record as a tuple of named files for the purpose of enabling collection of the information and subsequent access to it without any special tools.
+{{!!title}} defines an records as a ensembles of named files for the purpose of enabling collection of the information and subsequent access to it without any special tools.
 
 !! 1. Definitions
 !!! 1.1. Record
@@ -55,11 +55,11 @@ $$
 
 In this specification, a notation of $$P^\mu$$ or $$P^{\widetilde{OS}}$$ will be used to indicate a pathname or an octet string of a pairing, respectively.
 
-!! 2.4. Tuple
+!! 2.4. Ensemble
 
-A tuple is a set of pairings. A valid tuple MUST NOT have pairings with duplicate pathnames.
+An ensemble is a fixed set of pairings. A valid ensemble MUST NOT have pairings with duplicate pathnames.
 
-In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the tuple.
+In this specification, a notation of $$P_k$$ will be used to indicate a $$k$$-th pairing in the ensemble.
 
 !! 3. Reference
 
@@ -67,11 +67,11 @@ Reference $$R(r)$$ is a function that can uniquely identify record $$r$$. $$R_E(
 
 An implementation MAY choose its own reference and encoding functions at its discretion. However, future revisions of this specification MAY contain provisions that provide further instructions on this subject.
 
-At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s tuple and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
+At the time of writing, it is RECOMMENDED to define $$R(r)$$ as $$H(P_1^\mu, P_1^{\widetilde{OS}}, \mathellipsis, P_n^\mu, P_n^{\widetilde{OS}})$$ where $$n$$ is the number of pairings in $$r$$'s ensemble and $$H(x, \mathellipsis)$$ is a hash function. It is RECOMMENDED that this function is to be [[Blake2b]] with a size of 20 octets.  It is also RECOMMENDED that $$R_E(r)$$ is to be defined as [[Base32]] with no padding over $$R(r)$$. These are current defaults implemented in SIT.
 
 !! 4. Ordering
 
-Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the tuple of the record $$\beta$$ where $$O(\alpha,\beta) = <$$
+Ordering of records is done by including a pairing of $$\texttt{.prev/}R_E(\alpha)\rightarrow \emptyset$$ in the ensemble of the record $$\beta$$ where $$O(\alpha,\beta) = <$$
 
 In practical terms this means a presence of a an empty file.
 
