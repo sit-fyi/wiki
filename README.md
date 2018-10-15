@@ -1,6 +1,6 @@
 # Wiki
 
-[View wiki](https://sit.fyi/wiki)
+[View wiki](https://wiki.sit.fyi/)
 
 This is a repository hosting SIT's wiki. Its intention is describe SIT's architecture, specifications, proposals, etc. However, it is not intended to include SIT's manual.
 
