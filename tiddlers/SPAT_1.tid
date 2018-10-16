@@ -1,6 +1,6 @@
 created: 20181015232306898
 description: SPORE Pathname Attribute Tethering
-modified: 20181016000505344
+modified: 20181016002405400
 status: Raw
 tags: RFC
 title: SPAT/1
@@ -39,7 +39,7 @@ $$V$$ is an octet string.
 In order to tether an attribute for a pathname $$\mu$$ into a SPORE record, a following pairing MUST be a part of the ensemble:
 
 $$
-\mu\texttt{.}A \rightarrow V
+\texttt{.attrs/}\mu\texttt{.}A \rightarrow V
 $$
 
 The same ensemble MUST contain a pairing for $$\mu$$.
@@ -49,7 +49,7 @@ Example:
 $$
 \texttt{cli/sit-mr} \rightarrow \texttt{...}
 \land
-\texttt{cli/sit-mr.executable} \rightarrow \emptyset
+\texttt{.attrs/cli/sit-mr.executable} \rightarrow \emptyset
 $$
 
 The above example defines an attribute $$\texttt{executable}$$ with an empty value for $$\texttt{cli/sit-mr}$$
