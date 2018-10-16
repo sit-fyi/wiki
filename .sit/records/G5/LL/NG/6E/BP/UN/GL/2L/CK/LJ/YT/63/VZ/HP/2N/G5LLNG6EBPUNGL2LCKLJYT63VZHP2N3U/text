@@ -1,0 +1,5 @@
+`pre-commit` git hook used in wiki development does not discriminate usual commits from commits that are essentially patches for `.sit` that CAN NOT include anything outside of `.sit`.
+
+This leads to patch rejection.
+
+Proposed solution: check if all changes are in `.sit` then `docs` should not be added to the commit
