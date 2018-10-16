@@ -1,0 +1,51 @@
+created: 20181016003410895
+modified: 20181016005153227
+tags: 
+title: Editing Wiki
+type: text/vnd.tiddlywiki
+
+In order to contribute to this wiki, there are two ways to do this. One requires a bit of a setup (''full setup'') and is recommended for regular contributors. The other one is good for small sporadic changes when setting everything up is too much to ask for (''lightweight'').
+
+!! Full setup
+
+Install Node.js 8.x+, Git 2.x+, GNU make.
+
+Install tiddlywiki:
+
+```sh
+npm install -g tiddlywiki
+```
+We assume you have SIT installed at this point :)
+
+Then, setup the repository
+
+```sh
+git clone https://github.com/sit-fyi/wiki
+cd wiki
+cp tools/git-hooks/pre-commit .git/hooks
+```
+
+After this is done, when you edit wiki, commit your changes to a branch B and prepare a merge request
+
+```sh
+sit mr B
+```
+
+It will output an issue ID. Use it to send the merge request:
+
+```sh
+git send-email --to=wiki@inbox.sit.fyi master..ID
+```
+
+It will be automatically merged soon (if the inbox is operational at the time).
+
+Phew! It'll get easier :)
+
+!! Lightweight
+
+Just edit wiki on this website. Then hit the save button on the right
+[img[$:/core/images/save-button]]{{$:/core/images/save-button}}. E-mail the downloaded file to wiki-edits@sit.fyi. Done!
+
+Please bear in mind that this is going to be handled manually so it will take time to process these. 
+
+In order to speed this up a bit, export individual tiddlers and e-mailing them instead will make it easier for us to process the changes.
