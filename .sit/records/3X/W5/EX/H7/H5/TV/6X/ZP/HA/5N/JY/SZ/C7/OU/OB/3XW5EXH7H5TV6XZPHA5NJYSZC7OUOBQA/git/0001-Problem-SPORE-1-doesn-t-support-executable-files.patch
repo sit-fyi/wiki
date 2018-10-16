@@ -1,0 +1,191 @@
+From e1e357812000ec6e9f56433ef4b1420d4c72c185 Mon Sep 17 00:00:00 2001
+From: Yurii Rashkovskii <me@yrashk.com>
+Date: Mon, 15 Oct 2018 17:06:04 -0700
+Subject: [PATCH] Problem: SPORE/1 doesn't support executable files
+
+Solution: file a raw specification for describing attributes
+---
+ docs/index.html           | 67 ++++++++++++++++++++++++++++++++++++++++++++-
+ tiddlers/$__StoryList.tid |  6 ++---
+ tiddlers/SPAT_1.tid       | 69 +++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 138 insertions(+), 4 deletions(-)
+ create mode 100644 tiddlers/SPAT_1.tid
+
+diff --git a/docs/index.html b/docs/index.html
+index 53c1497..af9cdea 100644
+--- a/docs/index.html
++++ b/docs/index.html
+@@ -193,6 +193,8 @@ Error message and password prompt
+ 
+ <li>RFC/TabContent</li>
+ 
++<li>SPAT/1</li>
++
+ <li>SPORE/1</li>
+ 
+ <li>Stable</li>
+@@ -9259,7 +9261,70 @@ Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strict
+ 
+ &lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
+ </div>
+-<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015204402540" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
++<div created="20181015232306898" description="SPORE Pathname Attribute Tethering" modified="20181016000505344" status="Raw" tags="RFC" title="SPAT/1" type="text/vnd.tiddlywiki">
++<pre>! {{!!description}} [{{!!title}}] ({{!!status}})
++
++License: [[CC BY-SA 4.0]]
++
++!! Language
++
++{{RFC 2119: Language}}
++
++!!! Prerequisites: [[SPORE/1]]
++
++!! Introduction
++
++[[SPORE/1]] defines a form for records that is largely resembling a directory with files and sub-directories. However, being minimalist and striving to be universal, SPORE/1 is not able to convey additional information about such files.
++
++In some cases this would have been useful. For example, being able to pass execution attribute of a file on UNIX systems (`+x`). SPORE/1 itself does not provision for this.
++
++This specification fills this hole.
++
++!! 1. Constructs
++
++!! 1.1. Attribute
++
++Attribute is a morphism of a pathname $$\mu$$ to a tuple $$\langle A, V \rangle$$ where $$A$$ is an attribute and $$V$$ is a value.
++
++Valid $$A$$ is a component of a pathname and MUST NOT be delimited by a slash.
++
++$$V$$ is an octet string.
++
++!! 1.2. Tethering
++
++In order to tether an attribute for a pathname $$\mu$$ into a SPORE record, a following pairing MUST be a part of the ensemble:
++
++$$
++\mu\texttt{.}A \rightarrow V
++$$
++
++The same ensemble MUST contain a pairing for $$\mu$$.
++
++Example:
++
++$$
++\texttt{cli/sit-mr} \rightarrow \texttt{...}
++\land
++\texttt{cli/sit-mr.executable} \rightarrow \emptyset
++$$
++
++The above example defines an attribute $$\texttt{executable}$$ with an empty value for $$\texttt{cli/sit-mr}$$
++
++!! 2. Record Creation and Import
++
++When creating and importing existing records, implementations that support this specification, MUST attempt to preserve or establish the mapping of attributes known to it to the filesystem (where possible).
++
++As a practical example, if a file on UNIX filesystem has a `+x` mode set to convey that it is an executable file, then upon recording such file, the implementation MUST attempt to set the same attribute on the copied file in the record and insert an $$\texttt{executable}$$ tethering pairing into the record. Also, when importing a record onto a UNIX filesystem and there is a $$\texttt{executable}$$ tethering pairing in the record, the implementation MUST attempt ot set the `+x` mode on the corresponding file.
++
++!! Appendix A. Standard Attributes
++
++It is highly recommended that standard attributes are to be defined in individual numbered or otherwise named sections so that implementation can refer to them unambiguously (for example: 'SPAT/1 A.1' instead of simply $$\texttt{executable}$$)
++
++!! A.1. $$\texttt{executable}$$
++
++When this attribute is defined, the file representation of a pairing is considered to be executable. The value MAY be discarded.</pre>
++</div>
++<div created="20181013100609684" description="Sparse Pathname Octet-string Record Ensemble" modified="20181015232749914" status="Raw" tags="RFC" title="SPORE/1" type="text/vnd.tiddlywiki">
+ <pre>! {{!!description}} [{{!!title}}] ({{!!status}})
+ 
+ License: [[CC BY-SA 4.0]]
+diff --git a/tiddlers/$__StoryList.tid b/tiddlers/$__StoryList.tid
+index a75a10c..895ece9 100644
+--- a/tiddlers/$__StoryList.tid
++++ b/tiddlers/$__StoryList.tid
+@@ -1,6 +1,6 @@
+-created: 20181015195817703
+-list: SPORE/1
+-modified: 20181015195817703
++created: 20181016000505330
++list: SPAT/1 [[Welcome to SIT]] Concepts Record RFC SPORE/1
++modified: 20181016000505330
+ title: $:/StoryList
+ type: text/vnd.tiddlywiki
+ 
+diff --git a/tiddlers/SPAT_1.tid b/tiddlers/SPAT_1.tid
+new file mode 100644
+index 0000000..19f24f9
+--- /dev/null
++++ b/tiddlers/SPAT_1.tid
+@@ -0,0 +1,69 @@
++created: 20181015232306898
++description: SPORE Pathname Attribute Tethering
++modified: 20181016000505344
++status: Raw
++tags: RFC
++title: SPAT/1
++type: text/vnd.tiddlywiki
++
++! {{!!description}} [{{!!title}}] ({{!!status}})
++
++License: [[CC BY-SA 4.0]]
++
++!! Language
++
++{{RFC 2119: Language}}
++
++!!! Prerequisites: [[SPORE/1]]
++
++!! Introduction
++
++[[SPORE/1]] defines a form for records that is largely resembling a directory with files and sub-directories. However, being minimalist and striving to be universal, SPORE/1 is not able to convey additional information about such files.
++
++In some cases this would have been useful. For example, being able to pass execution attribute of a file on UNIX systems (`+x`). SPORE/1 itself does not provision for this.
++
++This specification fills this hole.
++
++!! 1. Constructs
++
++!! 1.1. Attribute
++
++Attribute is a morphism of a pathname $$\mu$$ to a tuple $$\langle A, V \rangle$$ where $$A$$ is an attribute and $$V$$ is a value.
++
++Valid $$A$$ is a component of a pathname and MUST NOT be delimited by a slash.
++
++$$V$$ is an octet string.
++
++!! 1.2. Tethering
++
++In order to tether an attribute for a pathname $$\mu$$ into a SPORE record, a following pairing MUST be a part of the ensemble:
++
++$$
++\mu\texttt{.}A \rightarrow V
++$$
++
++The same ensemble MUST contain a pairing for $$\mu$$.
++
++Example:
++
++$$
++\texttt{cli/sit-mr} \rightarrow \texttt{...}
++\land
++\texttt{cli/sit-mr.executable} \rightarrow \emptyset
++$$
++
++The above example defines an attribute $$\texttt{executable}$$ with an empty value for $$\texttt{cli/sit-mr}$$
++
++!! 2. Record Creation and Import
++
++When creating and importing existing records, implementations that support this specification, MUST attempt to preserve or establish the mapping of attributes known to it to the filesystem (where possible).
++
++As a practical example, if a file on UNIX filesystem has a `+x` mode set to convey that it is an executable file, then upon recording such file, the implementation MUST attempt to set the same attribute on the copied file in the record and insert an $$\texttt{executable}$$ tethering pairing into the record. Also, when importing a record onto a UNIX filesystem and there is a $$\texttt{executable}$$ tethering pairing in the record, the implementation MUST attempt ot set the `+x` mode on the corresponding file.
++
++!! Appendix A. Standard Attributes
++
++It is highly recommended that standard attributes are to be defined in individual numbered or otherwise named sections so that implementation can refer to them unambiguously (for example: 'SPAT/1 A.1' instead of simply $$\texttt{executable}$$)
++
++!! A.1. $$\texttt{executable}$$
++
++When this attribute is defined, the file representation of a pairing is considered to be executable. The value MAY be discarded.
+\ No newline at end of file
+-- 
+2.16.5
+
