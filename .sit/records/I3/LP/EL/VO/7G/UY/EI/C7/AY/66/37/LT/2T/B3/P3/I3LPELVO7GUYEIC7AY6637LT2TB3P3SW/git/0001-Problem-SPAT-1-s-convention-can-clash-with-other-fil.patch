@@ -1,0 +1,79 @@
+From b9885c7b6b5b445c5a2f726978e93d5547def470 Mon Sep 17 00:00:00 2001
+From: Yurii Rashkovskii <me@yrashk.com>
+Date: Mon, 15 Oct 2018 17:24:37 -0700
+Subject: [PATCH] Problem: SPAT/1's convention can clash with other files
+
+For example, if there's a file `command` and `command.executable`
+that is NOT intended to be an attribute then setting an `executable`
+attribute will be impossible.
+
+Solution: designate a special `.attrs` directory for this
+---
+ docs/index.html     | 6 +++---
+ tiddlers/SPAT_1.tid | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/docs/index.html b/docs/index.html
+index c0137aa..98b5a39 100644
+--- a/docs/index.html
++++ b/docs/index.html
+@@ -9261,7 +9261,7 @@ Ordering $$O(R_n, R_m)$$ equal to $$&gt;$$ (Greater) implies that $$R_n$$ strict
+ 
+ &lt;&lt;list-links &quot;[tag[RFC]status&lt;currentTab&gt;sort[title]]&quot;&gt;&gt;</pre>
+ </div>
+-<div created="20181015232306898" description="SPORE Pathname Attribute Tethering" modified="20181016000505344" status="Raw" tags="RFC" title="SPAT/1" type="text/vnd.tiddlywiki">
++<div created="20181015232306898" description="SPORE Pathname Attribute Tethering" modified="20181016002405400" status="Raw" tags="RFC" title="SPAT/1" type="text/vnd.tiddlywiki">
+ <pre>! {{!!description}} [{{!!title}}] ({{!!status}})
+ 
+ License: [[CC BY-SA 4.0]]
+@@ -9295,7 +9295,7 @@ $$V$$ is an octet string.
+ In order to tether an attribute for a pathname $$\mu$$ into a SPORE record, a following pairing MUST be a part of the ensemble:
+ 
+ $$
+-\mu\texttt{.}A \rightarrow V
++\texttt{.attrs/}\mu\texttt{.}A \rightarrow V
+ $$
+ 
+ The same ensemble MUST contain a pairing for $$\mu$$.
+@@ -9305,7 +9305,7 @@ Example:
+ $$
+ \texttt{cli/sit-mr} \rightarrow \texttt{...}
+ \land
+-\texttt{cli/sit-mr.executable} \rightarrow \emptyset
++\texttt{.attrs/cli/sit-mr.executable} \rightarrow \emptyset
+ $$
+ 
+ The above example defines an attribute $$\texttt{executable}$$ with an empty value for $$\texttt{cli/sit-mr}$$
+diff --git a/tiddlers/SPAT_1.tid b/tiddlers/SPAT_1.tid
+index 19f24f9..d823650 100644
+--- a/tiddlers/SPAT_1.tid
++++ b/tiddlers/SPAT_1.tid
+@@ -1,6 +1,6 @@
+ created: 20181015232306898
+ description: SPORE Pathname Attribute Tethering
+-modified: 20181016000505344
++modified: 20181016002405400
+ status: Raw
+ tags: RFC
+ title: SPAT/1
+@@ -39,7 +39,7 @@ $$V$$ is an octet string.
+ In order to tether an attribute for a pathname $$\mu$$ into a SPORE record, a following pairing MUST be a part of the ensemble:
+ 
+ $$
+-\mu\texttt{.}A \rightarrow V
++\texttt{.attrs/}\mu\texttt{.}A \rightarrow V
+ $$
+ 
+ The same ensemble MUST contain a pairing for $$\mu$$.
+@@ -49,7 +49,7 @@ Example:
+ $$
+ \texttt{cli/sit-mr} \rightarrow \texttt{...}
+ \land
+-\texttt{cli/sit-mr.executable} \rightarrow \emptyset
++\texttt{.attrs/cli/sit-mr.executable} \rightarrow \emptyset
+ $$
+ 
+ The above example defines an attribute $$\texttt{executable}$$ with an empty value for $$\texttt{cli/sit-mr}$$
+-- 
+2.16.5
+

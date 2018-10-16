@@ -1,0 +1,6 @@
+For example, if there's a file `command` and `command.executable`
+that is NOT intended to be an attribute then setting an `executable`
+attribute will be impossible.
+
+Solution: designate a special `.attrs` directory for this
+
