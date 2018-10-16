@@ -135,6 +135,8 @@ Error message and password prompt
 
 <li>$:/config/RelinkOnRename</li>
 
+<li>$:/config/SyncFilter</li>
+
 <li>$:/core</li>
 
 <li>$:/core/ui/EditorToolbar/excise</li>
@@ -217,6 +219,9 @@ Error message and password prompt
 <div id="storeArea" style="display:none;">
 <div created="20181014150520530" modified="20181014150521594" title="$:/config/RelinkOnRename" type="text/vnd.tiddlywiki">
 <pre>yes</pre>
+</div>
+<div created="20181016174006679" modified="20181016174014957" title="$:/config/SyncFilter" type="text/vnd.tiddlywiki">
+<pre>[is[tiddler]] -[[$:/StoryList]] -[[$:/HistoryList]] -[[$:/Import]] -[[$:/isEncrypted]] -[prefix[$:/status/]] -[prefix[$:/state/]] -[prefix[$:/temp/]]</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.17">
 <pre>{
