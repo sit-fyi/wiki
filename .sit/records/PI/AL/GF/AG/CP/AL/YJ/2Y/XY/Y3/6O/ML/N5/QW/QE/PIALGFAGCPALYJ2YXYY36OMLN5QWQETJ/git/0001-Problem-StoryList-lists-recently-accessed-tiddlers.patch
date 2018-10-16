@@ -1,0 +1,68 @@
+From fe76a91dd349cb1690051b2b868ff0151ed45397 Mon Sep 17 00:00:00 2001
+From: Yurii Rashkovskii <me@yrashk.com>
+Date: Tue, 16 Oct 2018 10:42:16 -0700
+Subject: [PATCH] Problem: $:/StoryList lists recently accessed tiddlers
+
+This is not very useful in the publishing context and is disruptive to
+the merge request workflow (might easily lead to conflicts).
+
+Solution: remove it and prevent it from being synced
+---
+ docs/index.html                   | 5 +++++
+ tiddlers/$__StoryList.tid         | 6 ------
+ tiddlers/$__config_SyncFilter.tid | 6 ++++++
+ 3 files changed, 11 insertions(+), 6 deletions(-)
+ delete mode 100644 tiddlers/$__StoryList.tid
+ create mode 100644 tiddlers/$__config_SyncFilter.tid
+
+diff --git a/docs/index.html b/docs/index.html
+index 681aa79..92f8a41 100644
+--- a/docs/index.html
++++ b/docs/index.html
+@@ -135,6 +135,8 @@ Error message and password prompt
+ 
+ <li>$:/config/RelinkOnRename</li>
+ 
++<li>$:/config/SyncFilter</li>
++
+ <li>$:/core</li>
+ 
+ <li>$:/core/ui/EditorToolbar/excise</li>
+@@ -218,6 +220,9 @@ Error message and password prompt
+ <div created="20181014150520530" modified="20181014150521594" title="$:/config/RelinkOnRename" type="text/vnd.tiddlywiki">
+ <pre>yes</pre>
+ </div>
++<div created="20181016174006679" modified="20181016174014957" title="$:/config/SyncFilter" type="text/vnd.tiddlywiki">
++<pre>[is[tiddler]] -[[$:/StoryList]] -[[$:/HistoryList]] -[[$:/Import]] -[[$:/isEncrypted]] -[prefix[$:/status/]] -[prefix[$:/state/]] -[prefix[$:/temp/]]</pre>
++</div>
+ <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.17">
+ <pre>{
+     &quot;tiddlers&quot;: {
+diff --git a/tiddlers/$__StoryList.tid b/tiddlers/$__StoryList.tid
+deleted file mode 100644
+index 895ece9..0000000
+--- a/tiddlers/$__StoryList.tid
++++ /dev/null
+@@ -1,6 +0,0 @@
+-created: 20181016000505330
+-list: SPAT/1 [[Welcome to SIT]] Concepts Record RFC SPORE/1
+-modified: 20181016000505330
+-title: $:/StoryList
+-type: text/vnd.tiddlywiki
+-
+diff --git a/tiddlers/$__config_SyncFilter.tid b/tiddlers/$__config_SyncFilter.tid
+new file mode 100644
+index 0000000..cb0629b
+--- /dev/null
++++ b/tiddlers/$__config_SyncFilter.tid
+@@ -0,0 +1,6 @@
++created: 20181016174006679
++modified: 20181016174014957
++title: $:/config/SyncFilter
++type: text/vnd.tiddlywiki
++
++[is[tiddler]] -[[$:/StoryList]] -[[$:/HistoryList]] -[[$:/Import]] -[[$:/isEncrypted]] -[prefix[$:/status/]] -[prefix[$:/state/]] -[prefix[$:/temp/]]
+\ No newline at end of file
+-- 
+2.16.5
+

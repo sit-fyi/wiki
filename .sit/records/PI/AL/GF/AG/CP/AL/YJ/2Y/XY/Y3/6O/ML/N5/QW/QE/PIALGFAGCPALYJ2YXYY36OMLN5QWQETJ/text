@@ -1,0 +1,5 @@
+This is not very useful in the publishing context and is disruptive to
+the merge request workflow (might easily lead to conflicts).
+
+Solution: remove it and prevent it from being synced
+
